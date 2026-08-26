@@ -1,0 +1,327 @@
+/**
+ * RUNIT ONEVIA 2026 - Event Presentation & Portfolio Data
+ * Categorized team roster with anonymous user SVG avatars
+ */
+
+const ANONYMOUS_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2310172A' rx='50'/%3E%3Ccircle cx='50' cy='38' r='20' fill='%2300F2FE' opacity='0.85'/%3E%3Cpath d='M20,85 C20,62 33,52 50,52 C67,52 80,62 80,85 Z' fill='%2300F2FE' opacity='0.85'/%3E%3C/svg%3E";
+
+const EVENT_DATA = {
+  meta: {
+    title: "RUNIT ONEVIA 2026",
+    tagline: "One Vision. One Community. One Direction.",
+    subtagline: "Annual Flagship Vision, Product & Community Event of Runit Infotech",
+    targetDate: "2026-09-19T18:00:00+05:30",
+    presenter: "Varun Akshay",
+    role: "Founder & Product Lead",
+    location: "Live Virtual Event / Screen Share"
+  },
+
+  motto: "Learn Continuously • Build Consistently • Collaborate Effectively • Grow Together",
+
+  objectives: [
+    { title: "Company Launch", desc: "Formalizing Runit Infotech's official direction, vision, and core capabilities." },
+    { title: "Personal Brand Building", desc: "Establishing thought leadership, technical credibility, and industry presence." },
+    { title: "Internal Community Building", desc: "Strengthening bonds among diverse professionals across MIS, Design, Ops & Tech." },
+    { title: "Team Alignment", desc: "Aligning team members around shared product goals and quarterly milestones." },
+    { title: "Product Showcase", desc: "Demonstrating active products, rebrands, SaaS platforms, and upcoming tools." },
+    { title: "Annual Vision Sharing", desc: "Setting the 5-year strategic roadmap for products, automation, and AI." }
+  ],
+
+  focusAreas: [
+    { name: "SaaS Products", icon: "cloud", desc: "Scalable cloud platforms built to solve business challenges." },
+    { name: "AI Solutions", icon: "cpu", desc: "AI-assisted workflows, analytics, and intelligent automation." },
+    { name: "Automation", icon: "zap", desc: "Eliminating manual overhead through automated data pipelines." },
+    { name: "MIS Reporting", icon: "bar-chart-3", desc: "Comprehensive business intelligence and decision-making dashboards." },
+    { name: "Digital Products", icon: "layout", desc: "Modern, high-utility web applications and developer tools." },
+    { name: "Retail Technology", icon: "shopping-bag", desc: "Inventory, sales tracking, and retail analytics solutions." },
+    { name: "BFSI Solutions", icon: "shield-check", desc: "Collection MIS, vendor billing, and financial compliance tracking." }
+  ],
+
+  journey: [
+    { phase: "Phase 1", title: "Individual Learning", desc: "Mastering core technologies, software architecture, and design fundamentals." },
+    { phase: "Phase 2", title: "Freelance Projects", desc: "Delivering real-world client solutions across diverse industries." },
+    { phase: "Phase 3", title: "Product Building", desc: "Initiating original software applications like PowerBooks and Orbita." },
+    { phase: "Phase 4", title: "Business Automation", desc: "Creating MIS reporting and workflow automation engines." },
+    { phase: "Phase 5", title: "Team Collaboration", desc: "Building a multidisciplinary core community of domain experts." },
+    { phase: "Phase 6", title: "Product Company Vision", desc: "Launching Runit Infotech as an integrated SaaS & AI solution ecosystem." }
+  ],
+
+  // Categorized Team Members with Anonymous User Avatars
+  teamGroups: {
+    inMeeting: [
+      {
+        id: "varun",
+        name: "Varun Akshay",
+        role: "Founder & Product Lead",
+        company: "Runit Infotech",
+        status: "In Meeting / Keynote Speaker",
+        professionDomain: "Software Architecture & Product Engineering",
+        skills: ["Product Strategy", "Full-Stack Development", "SaaS Architecture", "AI Automation"],
+        presentationFocus: "Event opening, Runit vision, product portfolio showcase (Orbita, PowerBooks, MoneyMatrix), 5-year strategy, and Runit Nextora quarterly execution rhythm.",
+        contribution: "Drives product design, software engineering, technical documentation, and strategic direction across all Runit platforms.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "karthikeyan",
+        name: "Karthikeyan",
+        role: "Senior Graphic Designer",
+        company: "Addapt UK",
+        status: "In Meeting / Speaker",
+        professionDomain: "Global Visual Branding & UI/UX Design Systems",
+        skills: ["Brand Identity", "Design Systems", "UI/UX Architecture", "Creative Direction"],
+        presentationFocus: "Visual identity standards, design tokens, UI consistency across Runit SaaS products, and elevating brand perception for global audiences.",
+        contribution: "Guides brand visual strategy, design systems, poster aesthetics, and user interface elegance.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "ravishankar",
+        name: "Ravishankar",
+        role: "Assistant Manager",
+        company: "Datamatics, Puducherry",
+        status: "In Meeting / Speaker",
+        professionDomain: "Operational Governance & Service Delivery Management",
+        skills: ["Operations Management", "SLA Compliance", "Team Leadership", "Process Optimization"],
+        presentationFocus: "Operational quality assurance, team workflow optimization, client delivery governance, and translating enterprise SLA standards into product features.",
+        contribution: "Provides operational oversight, quality benchmarks, and team governance principles for Runit service delivery.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "vishnupriyan",
+        name: "Vishnupriyan",
+        role: "MIS Executive",
+        company: "Datamatics, Puducherry",
+        status: "In Meeting / Speaker",
+        professionDomain: "Data Analytics & MIS Reporting Workflows",
+        skills: ["Data Warehousing", "Automated Reporting", "Excel Macro Automation", "Collection MIS"],
+        presentationFocus: "MIS data structure design, automated collection dashboards, tracking operational metrics, and reducing manual reporting overhead.",
+        contribution: "Shares domain expertise in MIS reporting, recovery tracking, and dashboard automation for financial and enterprise sectors.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "arunachalam",
+        name: "Arunachalam",
+        role: "MIS Executive",
+        company: "Datamatics, Puducherry",
+        status: "In Meeting / Speaker",
+        professionDomain: "Business Intelligence & Data Pipeline Automation",
+        skills: ["Data Verification", "BI Dashboards", "Automated Data Feeds", "Executive Reporting"],
+        presentationFocus: "Business intelligence pipelines, data validation methodologies, executive KPI dashboards, and data-driven decision support.",
+        contribution: "Contributes data pipeline architecture and analytics insights to Runit's MIS Reporting service line.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "kaviarasan",
+        name: "Kaviarasan",
+        role: "MIS Executive",
+        company: "Datamatics, Puducherry",
+        status: "In Meeting / Speaker",
+        professionDomain: "Operational Metrics & Performance Tracking",
+        skills: ["Metrics Visualization", "Performance Analytics", "Vendor Billing MIS", "Database Queries"],
+        presentationFocus: "Performance analytics, operational metrics visualization, collection recovery dashboards, and automated report generation.",
+        contribution: "Assists in designing performance tracking templates and vendor billing analytics dashboards.",
+        avatar: ANONYMOUS_AVATAR
+      }
+    ],
+
+    nonParticipants: [
+      {
+        id: "muthukumaran",
+        name: "Muthukumaran",
+        role: "Proprietor",
+        company: "SS Technologies, Puducherry",
+        status: "Core Contributor (Non-Participant)",
+        professionDomain: "IT Infrastructure, Hardware & Enterprise Systems",
+        skills: ["Infrastructure Setup", "Hardware Integration", "System Administration", "Business Operations"],
+        presentationFocus: "Technical infrastructure readiness, hardware integration for retail/MIS clients, and local business tech adoption.",
+        contribution: "Advises on IT infrastructure, hardware setup, and business expansion opportunities in Puducherry.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "kiruthiga",
+        name: "Kiruthiga",
+        role: "Entrepreneur",
+        company: "Batter Up Home Cakes, Puducherry",
+        status: "Core Contributor (Non-Participant)",
+        professionDomain: "Small Business Entrepreneurship & Customer Relations",
+        skills: ["Direct-to-Consumer Sales", "Order Management", "Brand Loyalty", "Retail Operations"],
+        presentationFocus: "Small business order tracking needs, micro-entrepreneur billing pain points, and usability feedback for tools like MoneyMatrix.",
+        contribution: "Provides real-world micro-business insights for financial tracking tools and small business UI design.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "anithkumar",
+        name: "Anithkumar",
+        role: "Senior Graphic Designer",
+        company: "Straive, Kumbakonam",
+        status: "Core Contributor (Non-Participant)",
+        professionDomain: "Publication Design & Typography Systems",
+        skills: ["Typography", "Layout Design", "Digital Publishing", "Visual Communication"],
+        presentationFocus: "Typography hierarchy, publication-grade documentation layouts, and visual asset perfection.",
+        contribution: "Supports visual collateral design, presentation layout perfection, and graphic assets.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "santhosh",
+        name: "Santhosh",
+        role: "Proprietor",
+        company: "Sandy & Style, Puducherry",
+        status: "Core Contributor (Non-Participant)",
+        professionDomain: "Retail Management & Commercial Strategy",
+        skills: ["Retail Sales Analytics", "Customer Experience", "Inventory Management", "Commercial Strategy"],
+        presentationFocus: "Retail store inventory tracking, POS system integration opportunities, and retail analytics dashboards.",
+        contribution: "Offers retail domain guidance for Runit Retail Technology and sales performance tracking tools.",
+        avatar: ANONYMOUS_AVATAR
+      },
+      {
+        id: "kirubaharan",
+        name: "Kirubaharan",
+        role: "Supply Chain Manager",
+        company: "Renault, Chennai",
+        status: "Core Contributor (Non-Participant)",
+        professionDomain: "Supply Chain Logistics & Process Scalability",
+        skills: ["Supply Chain Optimization", "Logistics Systems", "Process Engineering", "Enterprise Scalability"],
+        presentationFocus: "Supply chain workflow automation, logistics tracking modules, and scaling operational processes.",
+        contribution: "Strategic advisor for enterprise logistics workflows and supply chain technology modules.",
+        avatar: ANONYMOUS_AVATAR
+      }
+    ]
+  },
+
+  products: [
+    {
+      id: "orbita",
+      name: "Orbita",
+      badge: "Under Development",
+      category: "Business Productivity",
+      tagline: "Simplify workflows & elevate team execution",
+      description: "A productivity-focused platform engineered to streamline internal operations, track task progress, and eliminate workflow friction.",
+      features: ["Workflow Automation", "Task Dependency Matrix", "Real-Time Activity Feed", "Custom Dashboard Views"],
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
+      link: "https://orbita.runit.app",
+      tech: ["Node.js", "React / Vite", "TailwindCSS", "PostgreSQL"]
+    },
+    {
+      id: "powerbooks",
+      name: "PowerBooks",
+      badge: "Active Product",
+      category: "Information Management",
+      tagline: "Organize, manage & scale business data seamlessly",
+      description: "A comprehensive business-productivity engine designed to help professionals store, structure, and retrieve operational information with speed and privacy.",
+      features: ["Structured Document Management", "Smart Search & Filtering", "Role-Based Access", "Export & Reporting Tools"],
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
+      link: "https://powerbooks.runit.app",
+      tech: ["MongoDB / MERN", "React", "Express", "Node.js"]
+    },
+    {
+      id: "flowtrack",
+      name: "MoneyMatrix",
+      badge: "Rebrand Announcement",
+      rebrandNote: "Formerly known as Cash Tracker",
+      category: "Financial Productivity",
+      tagline: "Expense tracking, cash-flow visibility & financial control",
+      description: "A smart financial tracking tool providing real-time cash flow monitoring, expense classification, and vendor billing management.",
+      features: ["Cash Flow Analytics", "Expense Categorization", "Billing & Vendor Tracking", "Financial Health Reports"],
+      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80",
+      link: "https://moneymatrix.runit.app",
+      tech: ["Vite", "React", "Chart.js", "Firebase / Firestore"]
+    },
+    {
+      id: "ispark",
+      name: "ISPARK",
+      badge: "Active Platform",
+      category: "Learning & Innovation",
+      tagline: "Empowering minds, fostering collaboration & driving growth",
+      description: "A community-centric platform built to support continuous learning, project collaboration, and idea incubation among tech enthusiasts and creators.",
+      features: ["Skill Sharing Hub", "Project Incubation", "Mentorship Tracks", "Resource Library"],
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80",
+      link: "https://ispark.runit.app",
+      tech: ["HTML5 / JS", "TailwindCSS", "Firebase Auth"]
+    },
+    {
+      id: "mis-services",
+      name: "MIS Reporting Services",
+      badge: "Core Service Line",
+      category: "Business Intelligence",
+      tagline: "Transforming raw data into actionable decision dashboards",
+      description: "Turnkey MIS reporting solutions catering to BFSI, retail, and enterprise sectors, offering executive dashboards, collection tracking, and automated reporting.",
+      features: ["Executive Dashboards", "Collection MIS & Recovery Tracking", "Retail Inventory Analytics", "Vendor Billing & SLA Dashboards"],
+      image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&auto=format&fit=crop&q=80",
+      link: "https://mis.runit.app",
+      tech: ["PowerBI / Excel Automation", "Python Scripts", "SQL Data Warehousing"]
+    }
+  ],
+
+  roadmap: [
+    {
+      phase: "Phase 1",
+      years: "2026 - 2027",
+      title: "Foundation & Stabilization",
+      items: [
+        "Official Website Completion",
+        "Portfolio & Branding Rollout",
+        "Product Stabilization (Orbita & MoneyMatrix)",
+        "Social Media & Technical Content",
+        "Quarterly Review Rhythm (Runit Nextora)",
+        "Documentation & Code Standards"
+      ]
+    },
+    {
+      phase: "Phase 2",
+      years: "2027 - 2028",
+      title: "Enhancement & Client Expansion",
+      items: [
+        "Product Feature Upgrades",
+        "Initial External Client Acquisition",
+        "Expanded MIS Service Offerings",
+        "Custom Business Automation Tools",
+        "Community Contributor Program"
+      ]
+    },
+    {
+      phase: "Phase 3",
+      years: "2028 - 2030",
+      title: "SaaS & AI Integration",
+      items: [
+        "SaaS Product Commercialization",
+        "AI-Powered MIS & Reporting Agents",
+        "Turnkey Dashboard Products",
+        "Industry-Specific Vertical Modules",
+        "Scalable Enterprise Architecture"
+      ]
+    },
+    {
+      phase: "Phase 4",
+      years: "2030+",
+      title: "Ecosystem Leadership",
+      items: [
+        "Recognized Product Company Brand",
+        "Leading MIS & Analytics Brand",
+        "Autonomous AI Automation Platform",
+        "Full Business Intelligence Ecosystem"
+      ]
+    }
+  ],
+
+  memberPresentationFormat: [
+    "Self Introduction & Current Role",
+    "Professional Journey & Key Expertise",
+    "What Technology Means to Me",
+    "My Contribution to Runit",
+    "Business Opportunities I See",
+    "How We Can Collaborate",
+    "Message to the Team"
+  ],
+
+  immediateObjectives: [
+    "Finalizing Organizational Roles & Product Ownership",
+    "Initiating Agile Development Sprints for Orbita & MoneyMatrix",
+    "Standardizing Technical Product Documentation",
+    "Launching Social Media & Brand Awareness Handles",
+    "Releasing Public Beta Builds for Core Products",
+    "Establishing Quarterly Rhythm (Runit Nextora reviews)"
+  ]
+};
+
+if (typeof window !== 'undefined') {
+  window.EVENT_DATA = EVENT_DATA;
+}

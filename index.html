@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUNIT ONEVIA 2026 | Annual Flagship Event & Presentation</title>
+  <meta name="description" content="Runit Infotech Annual Flagship Vision, Product & Community Event 2026. One Vision. One Community. One Direction.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div id="app-root">
+    
+    <!-- Top Progress Bar for Presentation -->
+    <div id="progress-bar" class="progress-bar-top" style="width: 0%;"></div>
+
+    <!-- Header Navigation -->
+    <header class="app-header">
+      <div class="brand-wrapper">
+        <span class="text-brand-logo">
+          RUNIT <span class="text-brand-tag">ONEVIA 2026</span>
+        </span>
+      </div>
+
+      <div class="header-controls">
+        <!-- Home Button -->
+        <button id="btn-home-screen" class="btn-icon" title="Return to Countdown Screen / Home">
+          <i data-lucide="home"></i>
+        </button>
+
+        <!-- View Mode Switcher -->
+        <button id="btn-view-deck" class="btn-mode-toggle active" title="Slide Deck Mode (PPT alternative)">
+          <i data-lucide="presentation"></i> Slide Deck
+        </button>
+        <button id="btn-view-portal" class="btn-mode-toggle" title="Scrollable Dashboard View">
+          <i data-lucide="layout-dashboard"></i> Executive Portal
+        </button>
+
+        <!-- Tool Buttons -->
+        <button id="btn-media-editor" class="btn-icon" title="Update Product Media & Links">
+          <i data-lucide="image"></i>
+        </button>
+        <button id="btn-timer-settings" class="btn-icon" title="Configure Countdown Target">
+          <i data-lucide="clock"></i>
+        </button>
+        <button id="btn-fullscreen" class="btn-icon" title="Toggle Fullscreen (F)">
+          <i data-lucide="maximize-2"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         PRE-EVENT COUNTDOWN OVERLAY SCREEN
+         ============================================================ -->
+    <section id="countdown-overlay">
+      <div class="countdown-hero">
+        <div class="countdown-hero-brand">RUNIT INFOTECH</div>
+        
+        <div class="countdown-badge">
+          <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Annual Flagship Vision Event
+        </div>
+
+        <h1 class="countdown-title">RUNIT ONEVIA 2026</h1>
+        <p class="countdown-tagline">One Vision. One Community. One Direction.</p>
+
+        <!-- Live Clock Display -->
+        <div style="font-size: 0.95rem; color: var(--cyan); margin-bottom: 24px; font-weight: 600;">
+          Local Clock: <span id="current-clock-display">00:00:00</span> IST | Target Event: <span id="target-date-label">Sep 19, 2026 6:00 PM</span>
+        </div>
+
+        <!-- 4-Box Countdown Timer -->
+        <div class="timer-container">
+          <div class="timer-box">
+            <div id="timer-days" class="timer-value">00</div>
+            <div class="timer-label">Days</div>
+          </div>
+          <div class="timer-box">
+            <div id="timer-hours" class="timer-value">00</div>
+            <div class="timer-label">Hours</div>
+          </div>
+          <div class="timer-box">
+            <div id="timer-minutes" class="timer-value">00</div>
+            <div class="timer-label">Minutes</div>
+          </div>
+          <div class="timer-box">
+            <div id="timer-seconds" class="timer-value">00</div>
+            <div class="timer-label">Seconds</div>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="countdown-actions">
+          <button id="btn-unlock-event" class="btn-primary">
+            <i data-lucide="play-circle"></i> Start Event & Keynote
+          </button>
+        </div>
+
+        <div style="margin-top: 40px; font-size: 0.85rem; color: var(--text-muted);">
+          Runit Infotech • MIS + Automation + AI + SaaS + Business Solutions
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PRESENTATION CONTAINER (DECK & PORTAL VIEWS)
+         ============================================================ -->
+    <main id="presentation-container" class="presentation-main">
+
+      <!-- SLIDE DECK VIEW (DEFAULT KEYNOTE MODE) -->
+      <div id="deck-view" class="slide-frame">
+        <div id="slide-content-slot" class="slide-content-wrapper">
+          <!-- Dynamic slide content injected here via app.js -->
+        </div>
+      </div>
+
+      <!-- SCROLLABLE EXECUTIVE PORTAL VIEW (TOGGLABLE) -->
+      <div id="portal-view" class="portal-view" style="display: none;">
+        <!-- Dynamic scrollable sections injected here via app.js -->
+      </div>
+
+    </main>
+
+    <!-- FLOATING PRESENTER CONTROL BAR (SLIDE DECK) -->
+    <div id="presenter-bar" class="presenter-bar">
+      <!-- Home Button in Presenter Bar -->
+      <button id="btn-home-deck" class="btn-nav" title="Home / Countdown Screen">
+        <i data-lucide="home"></i>
+      </button>
+
+      <!-- Elapsed Presenter Timer -->
+      <div class="presenter-timer" title="Elapsed Presentation Time">
+        <i data-lucide="timer" style="width: 14px; height: 14px; display: inline;"></i> 
+        <span id="elapsed-time">00:00:00</span>
+      </div>
+
+      <!-- Slide Navigation Buttons -->
+      <div class="nav-buttons">
+        <button id="btn-prev-slide" class="btn-nav" title="Previous Slide (← / Up)">
+          <i data-lucide="chevron-left"></i>
+        </button>
+        
+        <div class="slide-counter-badge">
+          Slide <span id="current-slide-num">1</span> of <span id="total-slides-num">19</span>
+        </div>
+
+        <button id="btn-next-slide" class="btn-nav" title="Next Slide (→ / Space / Down)">
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Slide Quick Jump Dropdown -->
+      <select id="slide-selector">
+        <!-- Populated via JS -->
+      </select>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       MODAL WINDOWS
+       ============================================================ -->
+
+  <!-- 1. Product Detail Modal -->
+  <div id="modal-product" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-product')">&times;</button>
+      <div id="modal-product-body">
+        <!-- Content dynamically injected -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Media Manager Modal (Update Product Images & Links) -->
+  <div id="modal-media" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-media')">&times;</button>
+      <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem; margin-bottom: 8px;">
+        <i data-lucide="link" style="color: var(--cyan);"></i> Product Media & Link Manager
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">
+        Easily paste image URLs and live demo website links for your products below. Changes take effect instantly in the presentation!
+      </p>
+
+      <form id="media-form" class="media-editor-grid">
+        <!-- Injected via app.js -->
+      </form>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button type="button" class="btn-secondary" onclick="closeModal('modal-media')">Cancel</button>
+        <button type="button" id="btn-save-media" class="btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Timer Configuration Modal -->
+  <div id="modal-timer" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 480px;">
+      <button class="modal-close" onclick="closeModal('modal-timer')">&times;</button>
+      <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 12px;">
+        <i data-lucide="clock" style="color: var(--cyan);"></i> Set Event Target Time
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">
+        Set the date and time when RUNIT ONEVIA 2026 starts.
+      </p>
+
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label for="timer-input-datetime">Target Date & Time</label>
+        <input type="datetime-local" id="timer-input-datetime" class="form-input">
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+        <button type="button" class="btn-secondary" onclick="closeModal('modal-timer')">Cancel</button>
+        <button type="button" id="btn-save-timer" class="btn-primary">Update Timer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Data and Main Script -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
