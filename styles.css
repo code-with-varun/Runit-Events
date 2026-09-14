@@ -922,3 +922,65 @@ body {
     min-height: auto;
   }
 }
+
+/* ============================================================
+   ASSET SHOWCASE CARDS, GALLERY & PDF PREVIEWS
+   ============================================================ */
+.asset-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-fast);
+}
+
+.asset-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 242, 254, 0.15);
+}
+
+.asset-thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.asset-thumb {
+  width: 100%;
+  height: 65px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-glass);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.asset-thumb:hover {
+  transform: scale(1.05);
+  border-color: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+.pdf-preview-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--cyan);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: var(--transition-fast);
+}
+
+.pdf-preview-box:hover {
+  background: rgba(0, 242, 254, 0.08);
+  border-style: solid;
+}
+

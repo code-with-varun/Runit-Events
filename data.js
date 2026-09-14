@@ -1,6 +1,6 @@
 /**
  * RUNIT ONEVIA 2026 - Event Presentation & Portfolio Data
- * Categorized team roster with anonymous user SVG avatars
+ * Categorized team roster with anonymous user SVG avatars and new additions asset library
  */
 
 const ANONYMOUS_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2310172A' rx='50'/%3E%3Ccircle cx='50' cy='38' r='20' fill='%2300F2FE' opacity='0.85'/%3E%3Cpath d='M20,85 C20,62 33,52 50,52 C67,52 80,62 80,85 Z' fill='%2300F2FE' opacity='0.85'/%3E%3C/svg%3E";
@@ -45,6 +45,200 @@ const EVENT_DATA = {
     { phase: "Phase 5", title: "Team Collaboration", desc: "Building a multidisciplinary core community of domain experts." },
     { phase: "Phase 6", title: "Product Company Vision", desc: "Launching Runit Infotech as an integrated SaaS & AI solution ecosystem." }
   ],
+
+  // NEW ADDITIONS ASSET LIBRARY (Incorporated after Slide 8)
+  newAdditions: {
+    legalRegistrations: [
+      {
+        title: "Runit Infotech — Govt MSME Udyam",
+        category: "Govt Registration",
+        file: "assets/RUNIT INFOTECH UDYAM REGISTRATION CERTIFICATE.pdf",
+        type: "pdf",
+        desc: "Official Govt of India MSME Udyam Registration Certificate for Runit Infotech."
+      },
+      {
+        title: "Lavish Dreamers Pvt Ltd — MCA ROC & PAN",
+        category: "Corporate Registration",
+        file: "assets/Lavish Dreamers ROC Certificate.pdf",
+        type: "pdf",
+        panFile: "assets/Lavish Dreamers PAN.pdf",
+        desc: "Ministry of Corporate Affairs ROC Incorporation Certificate & PAN Card."
+      },
+      {
+        title: "Lavish Enterprises — MCA ROC & PAN",
+        category: "Corporate Registration",
+        file: "assets/Lavish Enterprises ROC Certificate.pdf",
+        type: "pdf",
+        panFile: "assets/lavish Enterprises PAN.pdf",
+        desc: "Official ROC Incorporation & PAN documentation for Lavish Enterprises."
+      }
+    ],
+
+    awards: [
+      {
+        recipient: "Varun Akshay",
+        title: "Star Performer Award",
+        category: "Leadership & Engineering",
+        image: "assets/Varun Star Performer Award.png",
+        desc: "Awarded for exceptional software architecture, technical leadership, and product execution."
+      },
+      {
+        recipient: "Vishnupriyan",
+        title: "AI Automation Award",
+        category: "Process Innovation",
+        image: "assets/Vishnu Priyan AI Automation Award.jpeg",
+        desc: "Recognized for pioneering AI-assisted automation bots and recovery tracking pipelines."
+      },
+      {
+        recipient: "Kaviarasan",
+        title: "Spot Award for Automation",
+        category: "MIS Excellence",
+        image: "assets/Kaviarasan Spot Award for Automation.jpeg",
+        desc: "Awarded for outstanding contribution to MIS reporting automation and vendor audit tools."
+      }
+    ],
+
+    liveDeployments: [
+      {
+        name: "MoneyMatrix (Cash Tracker)",
+        link: "https://runit-cash-tracker.vercel.app/",
+        category: "Financial Productivity",
+        desc: "Live cash-flow visibility & expense tracking app.",
+        tech: ["Vite", "React", "Chart.js"]
+      },
+      {
+        name: "Orbita Platform",
+        link: "https://orbita-ashen.vercel.app/",
+        category: "Task Management",
+        desc: "Productivity platform for team sprint & execution tracking.",
+        tech: ["React", "Node.js", "Tailwind"]
+      },
+      {
+        name: "ScripVault",
+        link: "https://scripvault.vercel.app/",
+        category: "Code & Snippet Vault",
+        screenshots: [
+          "assets/script vault (1).png",
+          "assets/script vault (2).png",
+          "assets/script vault (3).png",
+          "assets/script vault (4).png"
+        ],
+        desc: "Cloud snippet management tool for developers.",
+        tech: ["Next.js", "Vercel", "Tailwind"]
+      },
+      {
+        name: "Lavish Dreamers E-Com",
+        link: "https://lavishdreamers.com/",
+        category: "E-Commerce Brand",
+        screenshots: [
+          "assets/Lavish Dreamers (1).png",
+          "assets/Lavish Dreamers (2).png",
+          "assets/Lavish Dreamers (3).png"
+        ],
+        desc: "Direct-to-consumer e-commerce brand platform.",
+        tech: ["Web Platform", "E-Com Engine"]
+      },
+      {
+        name: "Runit Games",
+        link: "https://code-with-varun.github.io/Runit-games/",
+        category: "Interactive Gaming Hub",
+        screenshots: [
+          "assets/Runit Games (1).png",
+          "assets/Runit Games (2).png",
+          "assets/Runit Games (3).png"
+        ],
+        desc: "Browser-based gaming & canvas interaction suite.",
+        tech: ["HTML5 Canvas", "JavaScript"]
+      },
+      {
+        name: "Varun Developer Portfolio",
+        link: "https://code-with-varun.github.io/me-1lybio/",
+        category: "Developer Portfolio",
+        desc: "Developer & product showcase portfolio site.",
+        tech: ["GitHub Pages", "CSS Glassmorphism"]
+      }
+    ],
+
+    toolsAndUtilities: [
+      {
+        name: "Personal Finance Excel Dashboard",
+        category: "Financial Modeling",
+        screenshots: [
+          "assets/personal finance dashboard (1).png",
+          "assets/personal finance dashboard (2).png",
+          "assets/personal finance dashboard (3).png",
+          "assets/personal finance dashboard (4).png",
+          "assets/personal finance dashboard (5).png"
+        ],
+        desc: "Comprehensive financial modeling and net worth tracker."
+      },
+      {
+        name: "PHP Desktop Time Tracker App",
+        category: "Native Desktop App",
+        file: "assets/Time Tracker Php Desktop App.pdf",
+        type: "pdf",
+        desc: "Desktop app with activity logging & invoice computation."
+      },
+      {
+        name: "Smart Links Chrome Extension",
+        category: "Browser Utility",
+        screenshots: [
+          "assets/smart link google extension (1).png",
+          "assets/smart link google extension (2).png",
+          "assets/smart link google extension (3).png"
+        ],
+        desc: "Web extension for quick URL shortening & smart links."
+      },
+      {
+        name: "Skyeenet Enterprise App",
+        category: "Enterprise System",
+        file: "assets/skyeenet- updated 08-Jan-2022.pdf",
+        type: "pdf",
+        desc: "Automated operational management app & SOP manual."
+      }
+    ],
+
+    aiCreativeMedia: {
+      shorts: [
+        { title: "Thukalgal", images: ["assets/Thukalgal (1).webp", "assets/Thukalgal (2).webp", "assets/Thukalgal (3).webp", "assets/Thukalgal (4).webp", "assets/Thukalgal (5).webp"] },
+        { title: "Signout", images: ["assets/signout (1).webp", "assets/signout (2).webp", "assets/signout (3).webp"] },
+        { title: "Valaiyosai", images: ["assets/Valaiyosai (1).webp", "assets/Valaiyosai (2).webp", "assets/Valaiyosai (3).webp"] },
+        { title: "Kavasam", images: ["assets/DALL·E 2025-02-28 22.14.34 - A cinematic poster-style image in a semi-realistic style for the movie 'Kavasam'. The composition features Arjun, a young man with short black hair, d.webp", "assets/DALL·E 2025-02-28 22.10.14 - A cinematic close-up shot of Arjun staring at the helmet with a thoughtful expression in a semi-realistic style. Arjun, a young man with short black h.webp", "assets/DALL·E 2025-02-28 22.11.00 - A cinematic wide shot of Arjun riding his bike confidently while wearing a full-face helmet with a transparent visor in a semi-realistic style. Arjun,.webp"] },
+        { title: "im Moon", images: ["assets/im Moon (1).webp", "assets/im Moon (2).webp", "assets/im Moon (3).webp", "assets/im Moon (4).webp", "assets/im Moon (5).webp"] }
+      ],
+      weddingSimulations: [
+        "assets/Wedding story simulation (1).png",
+        "assets/Wedding story simulation (2).png",
+        "assets/Wedding story simulation (3).png",
+        "assets/Wedding story simulation (4).png",
+        "assets/Wedding story simulation (5).png",
+        "assets/Wedding story simulation (6).png"
+      ],
+      remixes: [
+        "assets/video editing remix (1).png",
+        "assets/video editing remix (2).png",
+        "assets/video editing remix (3).png"
+      ]
+    },
+
+    automationAndPublishing: [
+      {
+        title: "n8n Workflow Automations",
+        icon: "workflow",
+        desc: "Zero-touch webhook pipelines, automated emails, and database sync automation."
+      },
+      {
+        title: "DM Process Automations (MS Access)",
+        icon: "database",
+        desc: "Custom database forms, automated query pipelines, and legacy process migration tools."
+      },
+      {
+        title: "Digital & Magazine Publishing",
+        icon: "book-open",
+        desc: "Publication-grade typography, corporate brochures, and digital media releases."
+      }
+    ]
+  },
 
   // Categorized Team Members with Anonymous User Avatars
   teamGroups: {

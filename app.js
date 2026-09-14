@@ -1,5 +1,6 @@
 /**
  * RUNIT ONEVIA 2026 - Master Presentation & Event Site Engine
+ * 25 Keynote Slides including Legal Credentials, Awards, Live Products, Data Tools & AI Media
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // State Variables
   let currentSlideIndex = 0;
-  const totalSlides = 19;
+  const totalSlides = 25;
   let targetDate = new Date(EVENT_DATA.meta.targetDate);
   let timerInterval = null;
   let presenterTimerInterval = null;
@@ -143,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Manual Unlock Button
   document.getElementById('btn-unlock-event').addEventListener('click', startPresentation);
 
-  // Home Button Handlers (Return to Countdown / Initial Screen)
+  // Home Button Handlers (Return to Countdown Screen)
   const btnHomeScreen = document.getElementById('btn-home-screen');
   const btnHomeDeck = document.getElementById('btn-home-deck');
 
@@ -162,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     countdownOverlay.classList.add('hidden');
     countdownOverlay.style.display = 'none';
     countdownOverlay.style.zIndex = '-1';
-    goToSlide(0); // Start at Slide 1
+    goToSlide(0);
     startPresenterTimer();
   }
 
@@ -199,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============================================================
-  // 3. SLIDE DECK RENDERER (19 KEYNOTE SLIDES)
+  // 3. SLIDE DECK RENDERER (25 KEYNOTE SLIDES)
   // ============================================================
   const slideContentSlot = document.getElementById('slide-content-slot');
   const slideSelector = document.getElementById('slide-selector');
@@ -209,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   totalSlidesNumLabel.textContent = totalSlides;
 
-  // Dropdown Options (Slide 8 is Organization Overview, Slide 17 is Team & Core Community Roster)
+  // Dropdown Options (25 slides total, new additions inserted right after Slide 8)
   const slideTitles = [
     "1. RUNIT ONEVIA 2026",
     "2. Welcome Message",
@@ -219,17 +220,23 @@ document.addEventListener('DOMContentLoaded', () => {
     "6. Our Journey",
     "7. Mission & Vision",
     "8. Organization Overview & Community Vision",
-    "9. Product Portfolio Overview",
-    "10. Orbita Showcase",
-    "11. PowerBooks Showcase",
-    "12. MoneyMatrix Rebrand",
-    "13. ISPARK Platform",
-    "14. MIS Reporting Services",
-    "15. 5-Year Product Roadmap",
-    "16. Product Strategy Matrix",
-    "17. Team & Core Community Roster",
-    "18. Quarterly Rhythm & Objectives",
-    "19. Thank You & Open Discussion"
+    "9. Legal Registrations & Credentials",
+    "10. Team Recognition & Awards",
+    "11. Flagship Live Deployments",
+    "12. Data Tools & Desktop Utilities",
+    "13. AI Motion Graphics & Creative Media",
+    "14. Process Automation & Publishing",
+    "15. Product Portfolio Overview",
+    "16. Orbita Showcase",
+    "17. PowerBooks Showcase",
+    "18. MoneyMatrix Rebrand",
+    "19. ISPARK Platform",
+    "20. MIS Reporting Services",
+    "21. 5-Year Product Roadmap",
+    "22. Product Strategy Matrix",
+    "23. Team & Core Community Roster",
+    "24. Quarterly Rhythm & Objectives",
+    "25. Thank You & Open Discussion"
   ];
 
   slideSelector.innerHTML = slideTitles.map((t, i) => `<option value="${i}">${t}</option>`).join('');
@@ -261,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Annual Flagship Keynote</span>
-            <span class="slide-number">Slide 1 of 19</span>
+            <span class="slide-number">Slide 1 of 25</span>
           </div>
           <div style="text-align: center; margin: auto 0;">
             <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; color: var(--cyan); text-transform: uppercase; margin-bottom: 12px;">
@@ -283,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Founder Opening</span>
-            <span class="slide-number">Slide 2 of 19</span>
+            <span class="slide-number">Slide 2 of 25</span>
           </div>
           <h2 class="slide-title">Welcome to RUNIT ONEVIA 2026</h2>
           <p class="slide-subtitle">Building Tomorrow, Starting Today — Transforming ideas into products & products into solutions.</p>
@@ -322,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Session Flow</span>
-            <span class="slide-number">Slide 3 of 19</span>
+            <span class="slide-number">Slide 3 of 25</span>
           </div>
           <h2 class="slide-title">Event Agenda & Schedule</h2>
           <p class="slide-subtitle">Structured 30-Minute Founder Keynote followed by Interactive Community Presentations.</p>
@@ -334,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li>What is Runit Infotech? (3 Mins)</li>
                 <li>Our Journey & Milestone Growth (3 Mins)</li>
                 <li>Organization Overview & Community (3 Mins)</li>
+                <li>Legal Credentials, Awards & Asset Showcase (5 Mins)</li>
                 <li>Product Portfolio Showcase (10 Mins)</li>
                 <li>5-Year Strategy & Roadmap (5 Mins)</li>
                 <li>Immediate Action Items (2 Mins)</li>
@@ -357,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Strategic Foundation</span>
-            <span class="slide-number">Slide 4 of 19</span>
+            <span class="slide-number">Slide 4 of 25</span>
           </div>
           <h2 class="slide-title">Why Runit Exists: Six Core Objectives</h2>
           <p class="slide-subtitle">Runit is not just about coding. Runit is about solving real business problems using technology.</p>
@@ -376,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Company Vision</span>
-            <span class="slide-number">Slide 5 of 19</span>
+            <span class="slide-number">Slide 5 of 25</span>
           </div>
           <h2 class="slide-title">About Runit Infotech & Focus Areas</h2>
           <p class="slide-subtitle">A product-focused initiative building scalable solutions across 7 technology domains.</p>
@@ -401,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Milestones</span>
-            <span class="slide-number">Slide 6 of 19</span>
+            <span class="slide-number">Slide 6 of 25</span>
           </div>
           <h2 class="slide-title">Our Growth Journey</h2>
           <p class="slide-subtitle">Every experiment, learning cycle, and innovation milestone shapes the organization we are building today.</p>
@@ -421,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Core Strategy</span>
-            <span class="slide-number">Slide 7 of 19</span>
+            <span class="slide-number">Slide 7 of 25</span>
           </div>
           <h2 class="slide-title">Mission & Guiding Principles</h2>
           <p class="slide-subtitle">Transforming raw business complexity into elegant, automated technology platforms.</p>
@@ -446,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Organization Overview</span>
-            <span class="slide-number">Slide 8 of 19</span>
+            <span class="slide-number">Slide 8 of 25</span>
           </div>
           <h2 class="slide-title">Organization Structure & Vision</h2>
           <p class="slide-subtitle">Runit currently operates as a founder-led initiative supported by a multidisciplinary core community.</p>
@@ -484,11 +492,243 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 8: // Product Portfolio Overview
+      // ============================================================
+      // NEW ADDITION SLIDES (SLIDES 9 - 14) PLACED RIGHT AFTER SLIDE 8
+      // ============================================================
+
+      case 8: // Slide 9: Legal Registrations & Official Credentials
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Legal Compliance & Governance</span>
+            <span class="slide-number">Slide 9 of 25</span>
+          </div>
+          <h2 class="slide-title">Legal Registrations & Official Credentials</h2>
+          <p class="slide-subtitle">Official company registrations, MSME Udyam credentials & MCA ROC certificates. Click any PDF card to view the document.</p>
+          
+          <div class="grid-3" style="margin-top: 16px;">
+            ${d.newAdditions.legalRegistrations.map(item => `
+              <div class="content-card asset-card">
+                <div>
+                  <span class="product-badge" style="position: static; display: inline-block; margin-bottom: 8px;">${item.category}</span>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 6px;">${item.title}</h3>
+                  <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">${item.desc}</p>
+                </div>
+                
+                <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+                  <div class="pdf-preview-box" onclick="openPdfModal('${item.file}', '${item.title}')">
+                    <i data-lucide="file-text" style="color: var(--cyan); width: 24px; height: 24px;"></i>
+                    <div style="font-size: 0.85rem; color: #fff; font-weight: 600;">View ROC / Registration Certificate (PDF)</div>
+                  </div>
+                  ${item.panFile ? `
+                    <div class="pdf-preview-box" style="border-color: var(--purple);" onclick="openPdfModal('${item.panFile}', '${item.title} - PAN Document')">
+                      <i data-lucide="credit-card" style="color: var(--purple); width: 24px; height: 24px;"></i>
+                      <div style="font-size: 0.85rem; color: #fff; font-weight: 600;">View PAN Card Document (PDF)</div>
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        break;
+
+      case 9: // Slide 10: Team Achievements & Recognition Awards
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Team Excellence</span>
+            <span class="slide-number">Slide 10 of 25</span>
+          </div>
+          <h2 class="slide-title">Team Recognition & Excellence Awards</h2>
+          <p class="slide-subtitle">Honoring outstanding contributions across software architecture, AI automation, and MIS excellence. Click any certificate to enlarge.</p>
+          
+          <div class="grid-3" style="margin-top: 16px;">
+            ${d.newAdditions.awards.map(a => `
+              <div class="content-card asset-card">
+                <div>
+                  <span style="font-size: 0.75rem; font-weight: 700; color: var(--gold); background: rgba(255,215,0,0.1); border: 1px solid var(--gold); padding: 2px 10px; border-radius: 12px; display: inline-block; margin-bottom: 8px;">${a.category}</span>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff; margin-bottom: 2px;">${a.recipient}</h3>
+                  <p style="color: var(--cyan); font-weight: 600; font-size: 0.9rem; margin-bottom: 8px;">${a.title}</p>
+                  <p style="font-size: 0.83rem; color: var(--text-secondary); line-height: 1.4;">${a.desc}</p>
+                </div>
+
+                <div style="margin-top: 14px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${a.image}', '${a.recipient} - ${a.title}')">
+                  <img src="${a.image}" alt="${a.title}" style="width: 100%; height: 160px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/400x200/10172A/00F2FE?text=Award+Certificate'">
+                  <div style="background: rgba(0,0,0,0.7); text-align: center; padding: 6px; font-size: 0.78rem; color: var(--cyan); font-weight: 600;">
+                    🔍 Click to inspect original award certificate
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        break;
+
+      case 10: // Slide 11: Flagship Live Deployments & Web Sites
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Live Product Ecosystem</span>
+            <span class="slide-number">Slide 11 of 25</span>
+          </div>
+          <h2 class="slide-title">Flagship Live Deployments & Web Platforms</h2>
+          <p class="slide-subtitle">Active web applications, live SaaS tools, e-commerce brand portals & interactive games with production URLs.</p>
+          
+          <div class="grid-3" style="margin-top: 14px;">
+            ${d.newAdditions.liveDeployments.map(p => `
+              <div class="content-card asset-card">
+                <div>
+                  <span class="product-badge" style="position: static; display: inline-block; margin-bottom: 6px;">${p.category}</span>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff; margin-bottom: 4px;">${p.name}</h3>
+                  <p style="font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 8px;">${p.desc}</p>
+                  
+                  ${p.screenshots ? `
+                    <div class="asset-thumb-grid">
+                      ${p.screenshots.map(s => `
+                        <img src="${s}" class="asset-thumb" alt="Screenshot" onclick="openImageModal('${s}', '${p.name} Screenshot')">
+                      `).join('')}
+                    </div>
+                  ` : ''}
+                </div>
+
+                <div style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-glass); padding-top: 10px;">
+                  <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                    ${p.tech.map(t => `<span class="tech-tag" style="font-size: 0.7rem; padding: 2px 6px;">${t}</span>`).join('')}
+                  </div>
+                  <a href="${p.link}" target="_blank" class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem; text-decoration: none;">
+                    <i data-lucide="external-link" style="width: 14px; height: 14px;"></i> Open Live Site
+                  </a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        break;
+
+      case 11: // Slide 12: Data Tools, Desktop Engines & Utilities
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Utilities & Data Engines</span>
+            <span class="slide-number">Slide 12 of 25</span>
+          </div>
+          <h2 class="slide-title">Data Tools, Desktop Utilities & Browser Extensions</h2>
+          <p class="slide-subtitle">Personal finance dashboards, native desktop time tracking software & Google Chrome web extensions.</p>
+          
+          <div class="grid-2" style="margin-top: 14px;">
+            ${d.newAdditions.toolsAndUtilities.map(t => `
+              <div class="content-card asset-card">
+                <div>
+                  <span style="font-size: 0.75rem; font-weight: 700; color: var(--purple); background: rgba(127,0,255,0.1); border: 1px solid var(--purple); padding: 2px 10px; border-radius: 12px; display: inline-block; margin-bottom: 6px;">${t.category}</span>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff; margin-bottom: 4px;">${t.name}</h3>
+                  <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">${t.desc}</p>
+                </div>
+
+                ${t.screenshots ? `
+                  <div class="asset-thumb-grid" style="grid-template-columns: repeat(5, 1fr); margin-top: 10px;">
+                    ${t.screenshots.map(s => `
+                      <img src="${s}" class="asset-thumb" style="height: 55px;" alt="${t.name}" onclick="openImageModal('${s}', '${t.name}')">
+                    `).join('')}
+                  </div>
+                ` : ''}
+
+                ${t.file ? `
+                  <div class="pdf-preview-box" style="margin-top: 12px;" onclick="openPdfModal('${t.file}', '${t.name}')">
+                    <i data-lucide="file-text" style="color: var(--cyan); width: 22px; height: 22px;"></i>
+                    <div style="font-size: 0.85rem; color: #fff; font-weight: 600;">View Specification & User Guide (PDF)</div>
+                  </div>
+                ` : ''}
+              </div>
+            `).join('')}
+          </div>
+        `;
+        break;
+
+      case 12: // Slide 13: AI Motion Graphics & Creative Media
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Generative AI Media</span>
+            <span class="slide-number">Slide 13 of 25</span>
+          </div>
+          <h2 class="slide-title">AI Motion Graphics & Creative Media</h2>
+          <p class="slide-subtitle">Generative AI visual shorts (Thukalgal, Kavasam, Signout, Valaiyosai, im Moon), photorealistic character consistency & wedding story simulations.</p>
+          
+          <div class="grid-3" style="margin-top: 14px;">
+            <div class="content-card asset-card">
+              <div>
+                <h4 style="font-family: var(--font-heading); font-size: 1.05rem; color: var(--cyan); margin-bottom: 6px;">AI Motion Graphic Shorts</h4>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">Cinematic generative AI visual stories & motion posters.</p>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; max-height: 200px; overflow-y: auto;">
+                ${d.newAdditions.aiCreativeMedia.shorts.map(s => `
+                  <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); padding: 8px; border-radius: var(--radius-sm);">
+                    <div style="font-size: 0.8rem; color: #fff; font-weight: 600; margin-bottom: 4px;">${s.title} (${s.images.length} frames)</div>
+                    <div style="display: flex; gap: 4px; overflow-x: auto;">
+                      ${s.images.map(img => `
+                        <img src="${img}" style="width: 50px; height: 40px; object-fit: cover; border-radius: 4px; cursor: pointer;" onclick="openImageModal('${img}', '${s.title}')">
+                      `).join('')}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="content-card asset-card">
+              <div>
+                <h4 style="font-family: var(--font-heading); font-size: 1.05rem; color: var(--purple); margin-bottom: 6px;">AI Wedding Story Simulations</h4>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">Photorealistic AI character consistency & storytelling simulations.</p>
+              </div>
+              <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 10px;">
+                ${d.newAdditions.aiCreativeMedia.weddingSimulations.map((img, i) => `
+                  <img src="${img}" class="asset-thumb" alt="Wedding Simulation ${i+1}" onclick="openImageModal('${img}', 'AI Wedding Story Simulation ${i+1}')">
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="content-card asset-card">
+              <div>
+                <h4 style="font-family: var(--font-heading); font-size: 1.05rem; color: var(--gold); margin-bottom: 6px;">Video Editing & Visual Remixes</h4>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">Creative video editing, composite keying, and audio-visual remixes.</p>
+              </div>
+              <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 10px;">
+                ${d.newAdditions.aiCreativeMedia.remixes.map((img, i) => `
+                  <img src="${img}" class="asset-thumb" alt="Video Remix ${i+1}" onclick="openImageModal('${img}', 'Video Remix ${i+1}')">
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+        break;
+
+      case 13: // Slide 14: Process Automation & Digital Publishing
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Enterprise Operations</span>
+            <span class="slide-number">Slide 14 of 25</span>
+          </div>
+          <h2 class="slide-title">Process Automation & Digital Publishing</h2>
+          <p class="slide-subtitle">n8n zero-touch workflow engines, MS Access operational database tools & publication-grade document design.</p>
+          
+          <div class="grid-3" style="margin-top: 16px;">
+            ${d.newAdditions.automationAndPublishing.map(item => `
+              <div class="content-card" style="padding: 24px;">
+                <div style="width: 44px; height: 44px; background: rgba(0,242,254,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; color: var(--cyan);">
+                  <i data-lucide="${item.icon}"></i>
+                </div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff; margin-bottom: 6px;">${item.title}</h3>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">${item.desc}</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        break;
+
+      // ============================================================
+      // EXISTING PORTFOLIO & ROADMAP SLIDES (SLIDES 15 - 25)
+      // ============================================================
+
+      case 14: // Product Portfolio Overview
         html = `
           <div class="slide-header">
             <span class="slide-tag">Product Ecosystem</span>
-            <span class="slide-number">Slide 9 of 19</span>
+            <span class="slide-number">Slide 15 of 25</span>
           </div>
           <h2 class="slide-title">Product Portfolio Overview</h2>
           <p class="slide-subtitle">5 Core Pillars powering business productivity, financial tracking, learning, and MIS intelligence.</p>
@@ -508,19 +748,19 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 9: // Orbita Spotlight
-        html = renderProductSlide(d.products[0], 10);
+      case 15: // Orbita Spotlight
+        html = renderProductSlide(d.products[0], 16);
         break;
 
-      case 10: // PowerBooks Spotlight
-        html = renderProductSlide(d.products[1], 11);
+      case 16: // PowerBooks Spotlight
+        html = renderProductSlide(d.products[1], 17);
         break;
 
-      case 11: // MoneyMatrix / Rebrand Spotlight
+      case 17: // MoneyMatrix Spotlight
         html = `
           <div class="slide-header">
             <span class="slide-tag">Product Rebrand & Spotlight</span>
-            <span class="slide-number">Slide 12 of 19</span>
+            <span class="slide-number">Slide 18 of 25</span>
           </div>
           <div class="product-spotlight">
             <div class="product-info">
@@ -557,19 +797,19 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 12: // ISPARK Spotlight
-        html = renderProductSlide(d.products[3], 13);
+      case 18: // ISPARK Spotlight
+        html = renderProductSlide(d.products[3], 19);
         break;
 
-      case 13: // MIS Services Spotlight
-        html = renderProductSlide(d.products[4], 14);
+      case 19: // MIS Services Spotlight
+        html = renderProductSlide(d.products[4], 20);
         break;
 
-      case 14: // 5-Year Roadmap
+      case 20: // 5-Year Roadmap
         html = `
           <div class="slide-header">
             <span class="slide-tag">Strategic Vision</span>
-            <span class="slide-number">Slide 15 of 19</span>
+            <span class="slide-number">Slide 21 of 25</span>
           </div>
           <h2 class="slide-title">5-Year Strategic Product & Execution Roadmap</h2>
           <p class="slide-subtitle">Phased execution matrix from 2026 foundation through 2030+ industry leadership.</p>
@@ -588,11 +828,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 15: // Product Strategy Matrix
+      case 21: // Product Strategy Matrix
         html = `
           <div class="slide-header">
             <span class="slide-tag">Market Verticals</span>
-            <span class="slide-number">Slide 16 of 19</span>
+            <span class="slide-number">Slide 22 of 25</span>
           </div>
           <h2 class="slide-title">Product Strategy & Sector Solutions</h2>
           <p class="slide-subtitle">Targeted solutions engineered for enterprise MIS, retail analytics, and BFSI operations.</p>
@@ -625,11 +865,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 16: // Slide 17: Team & Core Community Roster (Moved to Slide 17 as requested!)
+      case 22: // Team & Core Community Roster
         html = `
           <div class="slide-header">
             <span class="slide-tag">Member Presentations</span>
-            <span class="slide-number">Slide 17 of 19</span>
+            <span class="slide-number">Slide 23 of 25</span>
           </div>
           <h2 class="slide-title" style="margin-bottom: 4px;">Team & Core Community Roster</h2>
           <p class="slide-subtitle" style="margin-bottom: 16px;">Click any team member card to view their profession-tailored presentation content & talk track.</p>
@@ -678,11 +918,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 17: // Immediate Objectives & Runit Nextora Cadence
+      case 23: // Immediate Objectives & Runit Nextora Cadence
         html = `
           <div class="slide-header">
             <span class="slide-tag">Execution Cadence</span>
-            <span class="slide-number">Slide 18 of 19</span>
+            <span class="slide-number">Slide 24 of 25</span>
           </div>
           <h2 class="slide-title">Immediate Objectives & Runit Nextora Cadence</h2>
           <p class="slide-subtitle">Next steps immediately following Runit Onevia 2026.</p>
@@ -707,11 +947,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 18: // Merged Slide 19: Thank You, Open Discussion & Grand Finale
+      case 24: // Slide 25: Thank You & Grand Finale
         html = `
           <div class="slide-header">
             <span class="slide-tag">Grand Finale</span>
-            <span class="slide-number">Slide 19 of 19</span>
+            <span class="slide-number">Slide 25 of 25</span>
           </div>
           <div style="text-align: center; margin: auto 0;">
             <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 12px;">
@@ -749,7 +989,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return `
       <div class="slide-header">
         <span class="slide-tag">Product Showcase</span>
-        <span class="slide-number">Slide ${slideNum} of 19</span>
+        <span class="slide-number">Slide ${slideNum} of 25</span>
       </div>
       <div class="product-spotlight">
         <div class="product-info">
@@ -786,7 +1026,9 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
-  // Navigation Controls (Keyboard & Mouse Scroll)
+  // ============================================================
+  // 4. NAVIGATION CONTROLS (KEYBOARD & MOUSE SCROLL)
+  // ============================================================
   document.getElementById('btn-prev-slide').addEventListener('click', () => goToSlide(currentSlideIndex - 1));
   document.getElementById('btn-next-slide').addEventListener('click', () => goToSlide(currentSlideIndex + 1));
 
@@ -909,7 +1151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 6. MEDIA MANAGER & MODALS
+  // 6. MEDIA MANAGER & LIGHTBOX MODALS
   // ============================================================
   document.getElementById('btn-media-editor').addEventListener('click', openMediaEditorModal);
 
@@ -972,6 +1214,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal) modal.classList.remove('active');
   };
 
+  // PDF Document Viewer Modal
+  window.openPdfModal = function(pdfUrl, title) {
+    const body = document.getElementById('modal-product-body');
+    body.innerHTML = `
+      <h3 style="font-family: var(--font-heading); color: var(--cyan); font-size: 1.3rem; margin-bottom: 8px;">📄 ${title}</h3>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">Viewing PDF Document in embedded viewer.</p>
+      
+      <div style="width: 100%; height: 500px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); background: #fff;">
+        <iframe src="${pdfUrl}" style="width: 100%; height: 100%; border: none;"></iframe>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+        <a href="${pdfUrl}" target="_blank" class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">
+          <i data-lucide="download"></i> Download Original PDF
+        </a>
+        <button class="btn-secondary" onclick="closeModal('modal-product')">Close Viewer</button>
+      </div>
+    `;
+    window.openModal('modal-product');
+  };
+
+  // Image Lightbox Modal
+  window.openImageModal = function(imgUrl, title) {
+    const body = document.getElementById('modal-product-body');
+    body.innerHTML = `
+      <h3 style="font-family: var(--font-heading); color: var(--cyan); font-size: 1.3rem; margin-bottom: 12px;">🖼️ ${title}</h3>
+      
+      <div style="width: 100%; max-height: 520px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); text-align: center; background: rgba(0,0,0,0.5);">
+        <img src="${imgUrl}" alt="${title}" style="max-width: 100%; max-height: 500px; object-fit: contain;">
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+        <button class="btn-secondary" onclick="closeModal('modal-product')">Close Lightbox</button>
+      </div>
+    `;
+    window.openModal('modal-product');
+  };
+
   window.openProductModal = function(productId) {
     const p = EVENT_DATA.products.find(item => item.id === productId);
     if (!p) return;
@@ -1002,7 +1282,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openModal('modal-product');
   };
 
-  // Detailed Team Member Modal (Profession-Tailored Content)
+  // Detailed Team Member Modal
   window.openTeamMemberModal = function(memberId) {
     const allMembers = [...EVENT_DATA.teamGroups.inMeeting, ...EVENT_DATA.teamGroups.nonParticipants];
     const m = allMembers.find(item => item.id === memberId);
