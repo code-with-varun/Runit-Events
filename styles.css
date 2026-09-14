@@ -924,13 +924,13 @@ body {
 }
 
 /* ============================================================
-   ASSET SHOWCASE CARDS, GALLERY & PDF PREVIEWS
+   ASSET SHOWCASE CARDS, GALLERY & PDF PREVIEWS (ZERO-SCROLL)
    ============================================================ */
 .asset-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -945,14 +945,14 @@ body {
 
 .asset-thumb-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  gap: 8px;
-  margin-top: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
 }
 
 .asset-thumb {
   width: 100%;
-  height: 65px;
+  height: 120px;
   object-fit: cover;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-glass);
@@ -961,26 +961,42 @@ body {
 }
 
 .asset-thumb:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
   border-color: var(--cyan);
-  box-shadow: 0 0 12px var(--cyan);
+  box-shadow: 0 0 16px var(--cyan);
+}
+
+.asset-thumb-lg {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glass);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.asset-thumb-lg:hover {
+  transform: scale(1.02);
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(0,242,254,0.4);
 }
 
 .pdf-preview-box {
   background: rgba(255, 255, 255, 0.03);
   border: 1px dashed var(--cyan);
   border-radius: var(--radius-sm);
-  padding: 12px;
+  padding: 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 12px;
   transition: var(--transition-fast);
 }
 
 .pdf-preview-box:hover {
-  background: rgba(0, 242, 254, 0.08);
+  background: rgba(0, 242, 254, 0.1);
   border-style: solid;
 }
 

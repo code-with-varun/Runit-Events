@@ -1,6 +1,6 @@
 /**
- * RUNIT ONEVIA 2026 - Event Presentation & Portfolio Data
- * Categorized team roster with anonymous user SVG avatars and new additions asset library
+ * RUNIT ONEVIA 2026 - Master Event Presentation & Portfolio Data
+ * 34 Zero-Scroll Keynote Slides with Expanded Big Visual Assets
  */
 
 const ANONYMOUS_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2310172A' rx='50'/%3E%3Ccircle cx='50' cy='38' r='20' fill='%2300F2FE' opacity='0.85'/%3E%3Cpath d='M20,85 C20,62 33,52 50,52 C67,52 80,62 80,85 Z' fill='%2300F2FE' opacity='0.85'/%3E%3C/svg%3E";
@@ -46,7 +46,7 @@ const EVENT_DATA = {
     { phase: "Phase 6", title: "Product Company Vision", desc: "Launching Runit Infotech as an integrated SaaS & AI solution ecosystem." }
   ],
 
-  // NEW ADDITIONS ASSET LIBRARY (Incorporated after Slide 8)
+  // EXPANDED ASSET LIBRARY FOR SPACIOUS ZERO-SCROLL SLIDES
   newAdditions: {
     legalRegistrations: [
       {
@@ -57,20 +57,20 @@ const EVENT_DATA = {
         desc: "Official Govt of India MSME Udyam Registration Certificate for Runit Infotech."
       },
       {
-        title: "Lavish Dreamers Pvt Ltd — MCA ROC & PAN",
-        category: "Corporate Registration",
+        title: "Lavish Dreamers Pvt Ltd — MCA ROC",
+        category: "Corporate Incorporation",
         file: "assets/Lavish Dreamers ROC Certificate.pdf",
-        type: "pdf",
         panFile: "assets/Lavish Dreamers PAN.pdf",
-        desc: "Ministry of Corporate Affairs ROC Incorporation Certificate & PAN Card."
+        type: "pdf",
+        desc: "Ministry of Corporate Affairs ROC Incorporation Certificate & Official PAN Card."
       },
       {
-        title: "Lavish Enterprises — MCA ROC & PAN",
+        title: "Lavish Enterprises — MCA ROC Certificate",
         category: "Corporate Registration",
         file: "assets/Lavish Enterprises ROC Certificate.pdf",
-        type: "pdf",
         panFile: "assets/lavish Enterprises PAN.pdf",
-        desc: "Official ROC Incorporation & PAN documentation for Lavish Enterprises."
+        type: "pdf",
+        desc: "Official ROC Incorporation Certificate & Govt PAN Card for Lavish Enterprises."
       }
     ],
 
@@ -80,53 +80,52 @@ const EVENT_DATA = {
         title: "Star Performer Award",
         category: "Leadership & Engineering",
         image: "assets/Varun Star Performer Award.png",
-        desc: "Awarded for exceptional software architecture, technical leadership, and product execution."
+        desc: "Awarded for software architecture, technical leadership, and product execution."
       },
       {
         recipient: "Vishnupriyan",
         title: "AI Automation Award",
         category: "Process Innovation",
         image: "assets/Vishnu Priyan AI Automation Award.jpeg",
-        desc: "Recognized for pioneering AI-assisted automation bots and recovery tracking pipelines."
+        desc: "Recognized for pioneering AI-assisted automation bots and recovery pipelines."
       },
       {
         recipient: "Kaviarasan",
         title: "Spot Award for Automation",
         category: "MIS Excellence",
         image: "assets/Kaviarasan Spot Award for Automation.jpeg",
-        desc: "Awarded for outstanding contribution to MIS reporting automation and vendor audit tools."
+        desc: "Awarded for outstanding contribution to MIS reporting automation and audit tools."
       }
     ],
 
-    liveDeployments: [
-      {
+    liveDeployments: {
+      moneyMatrix: {
         name: "MoneyMatrix (Cash Tracker)",
         link: "https://runit-cash-tracker.vercel.app/",
         category: "Financial Productivity",
         desc: "Live cash-flow visibility & expense tracking app.",
         tech: ["Vite", "React", "Chart.js"]
       },
-      {
+      orbita: {
         name: "Orbita Platform",
         link: "https://orbita-ashen.vercel.app/",
         category: "Task Management",
         desc: "Productivity platform for team sprint & execution tracking.",
         tech: ["React", "Node.js", "Tailwind"]
       },
-      {
+      scripVault: {
         name: "ScripVault",
         link: "https://scripvault.vercel.app/",
-        category: "Code & Snippet Vault",
+        category: "Code Vault",
         screenshots: [
           "assets/script vault (1).png",
           "assets/script vault (2).png",
           "assets/script vault (3).png",
           "assets/script vault (4).png"
         ],
-        desc: "Cloud snippet management tool for developers.",
-        tech: ["Next.js", "Vercel", "Tailwind"]
+        desc: "Cloud snippet management tool for developers."
       },
-      {
+      lavishDreamers: {
         name: "Lavish Dreamers E-Com",
         link: "https://lavishdreamers.com/",
         category: "E-Commerce Brand",
@@ -135,32 +134,29 @@ const EVENT_DATA = {
           "assets/Lavish Dreamers (2).png",
           "assets/Lavish Dreamers (3).png"
         ],
-        desc: "Direct-to-consumer e-commerce brand platform.",
-        tech: ["Web Platform", "E-Com Engine"]
+        desc: "Direct-to-consumer e-commerce brand platform."
       },
-      {
-        name: "Runit Games",
+      runitGames: {
+        name: "Runit Games Hub",
         link: "https://code-with-varun.github.io/Runit-games/",
-        category: "Interactive Gaming Hub",
+        category: "Gaming Suite",
         screenshots: [
           "assets/Runit Games (1).png",
           "assets/Runit Games (2).png",
           "assets/Runit Games (3).png"
         ],
-        desc: "Browser-based gaming & canvas interaction suite.",
-        tech: ["HTML5 Canvas", "JavaScript"]
+        desc: "Browser-based gaming & canvas interaction suite."
       },
-      {
+      varunPortfolio: {
         name: "Varun Developer Portfolio",
         link: "https://code-with-varun.github.io/me-1lybio/",
-        category: "Developer Portfolio",
-        desc: "Developer & product showcase portfolio site.",
-        tech: ["GitHub Pages", "CSS Glassmorphism"]
+        category: "Developer Showcase",
+        desc: "Developer & product showcase portfolio site."
       }
-    ],
+    },
 
-    toolsAndUtilities: [
-      {
+    toolsAndUtilities: {
+      excelDashboard: {
         name: "Personal Finance Excel Dashboard",
         category: "Financial Modeling",
         screenshots: [
@@ -170,16 +166,16 @@ const EVENT_DATA = {
           "assets/personal finance dashboard (4).png",
           "assets/personal finance dashboard (5).png"
         ],
-        desc: "Comprehensive financial modeling and net worth tracker."
+        desc: "Comprehensive financial modeling, expense tracking & net worth calculator."
       },
-      {
+      desktopTimeTracker: {
         name: "PHP Desktop Time Tracker App",
         category: "Native Desktop App",
         file: "assets/Time Tracker Php Desktop App.pdf",
         type: "pdf",
-        desc: "Desktop app with activity logging & invoice computation."
+        desc: "Native desktop time tracking software with activity logging & invoice computation."
       },
-      {
+      smartLinks: {
         name: "Smart Links Chrome Extension",
         category: "Browser Utility",
         screenshots: [
@@ -189,27 +185,51 @@ const EVENT_DATA = {
         ],
         desc: "Web extension for quick URL shortening & smart links."
       },
-      {
+      skyeenet: {
         name: "Skyeenet Enterprise App",
         category: "Enterprise System",
         file: "assets/skyeenet- updated 08-Jan-2022.pdf",
         type: "pdf",
         desc: "Automated operational management app & SOP manual."
       }
-    ],
+    },
 
     aiCreativeMedia: {
-      shorts: [
-        { title: "Thukalgal", images: ["assets/Thukalgal (1).webp", "assets/Thukalgal (2).webp", "assets/Thukalgal (3).webp", "assets/Thukalgal (4).webp", "assets/Thukalgal (5).webp"] },
-        { title: "Signout", images: ["assets/signout (1).webp", "assets/signout (2).webp", "assets/signout (3).webp"] },
-        { title: "Valaiyosai", images: ["assets/Valaiyosai (1).webp", "assets/Valaiyosai (2).webp", "assets/Valaiyosai (3).webp"] },
-        { title: "Kavasam", images: ["assets/DALL·E 2025-02-28 22.14.34 - A cinematic poster-style image in a semi-realistic style for the movie 'Kavasam'. The composition features Arjun, a young man with short black hair, d.webp", "assets/DALL·E 2025-02-28 22.10.14 - A cinematic close-up shot of Arjun staring at the helmet with a thoughtful expression in a semi-realistic style. Arjun, a young man with short black h.webp", "assets/DALL·E 2025-02-28 22.11.00 - A cinematic wide shot of Arjun riding his bike confidently while wearing a full-face helmet with a transparent visor in a semi-realistic style. Arjun,.webp"] },
-        { title: "im Moon", images: ["assets/im Moon (1).webp", "assets/im Moon (2).webp", "assets/im Moon (3).webp", "assets/im Moon (4).webp", "assets/im Moon (5).webp"] }
+      imMoon: [
+        "assets/im Moon (1).webp",
+        "assets/im Moon (2).webp",
+        "assets/im Moon (3).webp",
+        "assets/im Moon (4).webp",
+        "assets/im Moon (5).webp"
       ],
-      weddingSimulations: [
+      thukalgal: [
+        "assets/Thukalgal (1).webp",
+        "assets/Thukalgal (2).webp",
+        "assets/Thukalgal (3).webp",
+        "assets/Thukalgal (4).webp",
+        "assets/Thukalgal (5).webp"
+      ],
+      kavasam: [
+        "assets/kavasam (1).webp",
+        "assets/kavasam (2).webp",
+        "assets/kavasam (3).webp"
+      ],
+      signout: [
+        "assets/signout (1).webp",
+        "assets/signout (2).webp",
+        "assets/signout (3).webp"
+      ],
+      valaiyosai: [
+        "assets/Valaiyosai (1).webp",
+        "assets/Valaiyosai (2).webp",
+        "assets/Valaiyosai (3).webp"
+      ],
+      weddingSimulationsPart1: [
         "assets/Wedding story simulation (1).png",
         "assets/Wedding story simulation (2).png",
-        "assets/Wedding story simulation (3).png",
+        "assets/Wedding story simulation (3).png"
+      ],
+      weddingSimulationsPart2: [
         "assets/Wedding story simulation (4).png",
         "assets/Wedding story simulation (5).png",
         "assets/Wedding story simulation (6).png"
