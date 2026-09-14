@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // State Variables
   let currentSlideIndex = 0;
-  const totalSlides = 35;
+  const totalSlides = 39;
   let targetDate = new Date(EVENT_DATA.meta.targetDate);
   let timerInterval = null;
   let presenterTimerInterval = null;
@@ -190,17 +190,39 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openModal('modal-timer');
   }
 
-  document.getElementById('btn-save-timer').addEventListener('click', () => {
-    const val = document.getElementById('timer-input-datetime').value;
-    if (val) {
-      targetDate = new Date(val);
-      updateClockAndCountdown();
-      window.closeModal('modal-timer');
-    }
-  });
+  // Keybindings & Presentation Modes
+  window.addEventListener('keydown', handleKeyDown);
+
+  // Initialize Clock & Countdowns
+  updateClockAndCountdown();
+  timerInterval = setInterval(updateClockAndCountdown, 1000);
+
+  // Quick Lock Code Modal Input Listener
+  const lockInput = document.getElementById('lock-passcode');
+  if (lockInput) {
+    lockInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        window.unlockEvent();
+      }
+    });
+  }
+
+  // Presenter Timer Settings Save Listener
+  const timerInput = document.getElementById('timer-date-input');
+  const btnSaveTimer = document.getElementById('btn-save-timer');
+  if (btnSaveTimer && timerInput) {
+    btnSaveTimer.addEventListener('click', () => {
+      const val = timerInput.value;
+      if (val) {
+        targetDate = new Date(val);
+        updateClockAndCountdown();
+        window.closeModal('modal-timer');
+      }
+    });
+  }
 
   // ============================================================
-  // 3. SLIDE DECK RENDERER (35 KEYNOTE SLIDES - ZERO SCROLL)
+  // 3. SLIDE DECK RENDERER (39 KEYNOTE SLIDES - ZERO SCROLL)
   // ============================================================
   const slideContentSlot = document.getElementById('slide-content-slot');
   const slideSelector = document.getElementById('slide-selector');
@@ -210,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   totalSlidesNumLabel.textContent = totalSlides;
 
-  // Dropdown Options (35 zero-scroll slides)
+  // Dropdown Options (39 zero-scroll slides)
   const slideTitles = [
     "1. RUNIT ONEVIA 2026",
     "2. Welcome Message",
@@ -221,32 +243,36 @@ document.addEventListener('DOMContentLoaded', () => {
     "7. Our Growth Journey",
     "8. Mission & Guiding Principles",
     "9. Organization Structure & Vision",
-    "10. Legal Credentials: MSME Udyam & Lavish Dreamers",
-    "11. Legal Credentials: Lavish Enterprises ROC & PAN",
-    "12. Team Recognition & Excellence Awards",
-    "13. Live Production Apps: MoneyMatrix & Orbita",
-    "14. Live Applications: ScripVault & Lavish Dreamers",
-    "15. Runit Games Suite & Developer Portfolio",
-    "16. Personal Finance Excel Dashboard",
-    "17. Desktop Trackers, Extensions & Enterprise SOPs",
-    "18. AI Motion Short: im Moon Spotlight",
-    "19. AI Motion Short: Thukalgal Showcase",
-    "20. AI Motion Shorts: Kavasam, Signout & Valaiyosai",
-    "21. AI Wedding Story Simulations (Part 1)",
-    "22. AI Wedding Story Simulations (Part 2)",
-    "23. Video Editing & Visual Remixes",
-    "24. Process Automation & Digital Publishing",
-    "25. Product Portfolio Overview",
-    "26. Orbita Showcase",
-    "27. PowerBooks Showcase",
-    "28. MoneyMatrix Rebrand",
-    "29. ISPARK Platform",
-    "30. MIS Reporting Services",
-    "31. 5-Year Strategic Product Roadmap",
-    "32. Product Strategy Matrix",
-    "33. Team & Core Community Roster",
-    "34. Quarterly Rhythm & Objectives",
-    "35. Thank You & Open Discussion"
+    "10. Legal Credentials: Runit Infotech Govt MSME Udyam",
+    "11. Legal Credentials: Lavish Dreamers Pvt Ltd ROC & PAN",
+    "12. Legal Credentials: Lavish Enterprises ROC & PAN",
+    "13. Team Recognition & Excellence Awards",
+    "14. Live Production Apps: MoneyMatrix & Orbita",
+    "15. Live Applications: ScripVault & Lavish Dreamers",
+    "16. Runit Games Suite & Developer Portfolio",
+    "17. Personal Finance Excel Dashboard",
+    "18. Desktop Trackers & Enterprise SOPs",
+    "19. Smart Links Chrome Extension",
+    "20. AI Motion Short: im Moon Spotlight",
+    "21. AI Motion Short: Thukalgal Showcase",
+    "22. AI Motion Shorts: Kavasam, Signout & Valaiyosai",
+    "23. AI Wedding Story Simulations (Part 1)",
+    "24. AI Wedding Story Simulations (Part 2)",
+    "25. Video Editing & Visual Remixes",
+    "26. n8n Workflow Automations",
+    "27. Digital & Magazine Publishing Works",
+    "28. Enterprise Process Automation & MS Access Tools",
+    "29. Product Portfolio Overview",
+    "30. Orbita Showcase",
+    "31. PowerBooks Showcase",
+    "32. MoneyMatrix Rebrand",
+    "33. ISPARK Platform",
+    "34. MIS Reporting Services",
+    "35. 5-Year Strategic Product Roadmap",
+    "36. Product Strategy Matrix",
+    "37. Team & Core Community Roster",
+    "38. Quarterly Rhythm & Objectives",
+    "39. Thank You & Open Discussion"
   ];
 
   slideSelector.innerHTML = slideTitles.map((t, i) => `<option value="${i}">${t}</option>`).join('');
@@ -361,13 +387,10 @@ document.addEventListener('DOMContentLoaded', () => {
         html = `
           <div class="slide-header">
             <span class="slide-tag">Annual Flagship Keynote</span>
-            <span class="slide-number">Slide 1 of 34</span>
+            <span class="slide-number">Slide 1 of ${totalSlides}</span>
           </div>
           <div style="text-align: center; margin: auto 0;">
-            <div style="display: flex; justify-content: center; margin-bottom: 16px;">
-              <img src="assets/Runit logo pack/primary-logo-light.png" alt="Runit Infotech Logo" style="height: 65px; object-fit: contain; filter: drop-shadow(0 0 12px var(--cyan));" onerror="this.style.display='none'">
-            </div>
-            <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; color: var(--cyan); text-transform: uppercase; margin-bottom: 12px;">
+            <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; color: var(--cyan); text-transform: uppercase; margin-bottom: 12px; margin-top: 20px;">
               RUNIT INFOTECH
             </div>
             <h1 class="slide-title" style="font-size: 3.5rem;">${d.meta.title}</h1>
@@ -609,42 +632,58 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 9: // Slide 10: Legal Credentials: Runit Infotech & Lavish Dreamers (INLINE PDF EMBEDS)
+      case 9: // Slide 10: Legal Credentials: Runit Infotech Govt MSME Udyam
         const leg1 = d.newAdditions.legalRegistrations[0];
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Legal Compliance</span>
+            <span class="slide-number">Slide 10 of ${totalSlides}</span>
+          </div>
+          <h2 class="slide-title">Legal Credentials: Runit Infotech</h2>
+          <p class="slide-subtitle">Official Govt of India MSME Udyam Registration Certificate loaded directly on canvas.</p>
+          
+          <div class="content-card asset-card" style="padding: 20px; margin-top: 14px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff;">${leg1.title}</h3>
+              <button onclick="openPdfModal('${leg1.file}', '${leg1.title}')" class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem;">Fullscreen PDF →</button>
+            </div>
+            <div style="width: 100%; height: 340px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 6px;">
+              <iframe src="${leg1.file}#toolbar=0" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+          </div>
+        `;
+        break;
+
+      case 10: // Slide 11: Legal Credentials: Lavish Dreamers Pvt Ltd ROC & PAN
         const leg2 = d.newAdditions.legalRegistrations[1];
         html = `
           <div class="slide-header">
             <span class="slide-tag">Legal Compliance</span>
-            <span class="slide-number">Slide 10 of 35</span>
+            <span class="slide-number">Slide 11 of ${totalSlides}</span>
           </div>
-          <h2 class="slide-title">Legal Credentials: Runit Infotech & Lavish Dreamers</h2>
-          <p class="slide-subtitle">Govt MSME Udyam Certificate & MCA Incorporation Documents loaded directly on canvas.</p>
+          <h2 class="slide-title">Legal Credentials: Lavish Dreamers Pvt Ltd</h2>
+          <p class="slide-subtitle">MCA ROC Incorporation Certificate loaded directly on canvas with Govt PAN Card.</p>
           
           <div class="grid-2" style="margin-top: 14px;">
-            <div class="content-card asset-card" style="padding: 18px;">
+            <div class="content-card asset-card" style="padding: 20px;">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff;">${leg1.title}</h3>
-                <button onclick="openPdfModal('${leg1.file}', '${leg1.title}')" class="btn-primary" style="padding: 4px 10px; font-size: 0.75rem;">Fullscreen PDF →</button>
+                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff;">MCA ROC Certificate of Incorporation</h3>
+                <button onclick="openPdfModal('${leg2.file}', '${leg2.title}')" class="btn-primary" style="padding: 4px 10px; font-size: 0.75rem;">Fullscreen PDF →</button>
               </div>
-              <div style="width: 100%; height: 260px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 6px;">
-                <iframe src="${leg1.file}#toolbar=0" style="width: 100%; height: 100%; border: none;"></iframe>
+              <div style="width: 100%; height: 300px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 6px;">
+                <iframe src="${leg2.file}#toolbar=0" style="width: 100%; height: 100%; border: none;"></iframe>
               </div>
             </div>
 
-            <div class="content-card asset-card" style="padding: 18px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff;">${leg2.title}</h3>
-                <button onclick="openPdfModal('${leg2.file}', '${leg2.title}')" class="btn-primary" style="padding: 4px 10px; font-size: 0.75rem;">Fullscreen PDF →</button>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
-                <div style="width: 100%; height: 150px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff;">
-                  <iframe src="${leg2.file}#toolbar=0" style="width: 100%; height: 100%; border: none;"></iframe>
-                </div>
-                <div style="border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glow); cursor: pointer;" onclick="openImageModal('${leg2.panImg}', 'Lavish Dreamers Govt PAN Card')">
-                  <img src="${leg2.panImg}" style="width: 100%; height: 95px; object-fit: cover;" alt="Lavish Dreamers PAN Card">
-                  <div style="background: rgba(0,0,0,0.85); text-align: center; padding: 3px; font-size: 0.75rem; color: var(--cyan); font-weight: 600;">
-                    💳 Click to Enlarge Lavish Dreamers Govt PAN Card
-                  </div>
+            <div class="content-card asset-card" style="padding: 20px;">
+              <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff; margin-bottom: 6px;">Government PAN Card Identification</h3>
+              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 12px;">
+                Official Permanent Account Number (PAN) tax registration record for corporate governance.
+              </p>
+              <div style="border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--cyan); cursor: pointer; margin-top: 8px;" onclick="openImageModal('${leg2.panImg}', 'Lavish Dreamers Govt PAN Card')">
+                <img src="${leg2.panImg}" style="width: 100%; height: 200px; object-fit: cover;" alt="Lavish Dreamers PAN Card">
+                <div style="background: rgba(0,0,0,0.85); text-align: center; padding: 6px; font-size: 0.8rem; color: var(--cyan); font-weight: 700;">
+                  💳 Click to Enlarge Lavish Dreamers Govt PAN Card
                 </div>
               </div>
             </div>
@@ -652,12 +691,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 10: // Slide 11: Legal Credentials: Lavish Enterprises ROC & PAN (INLINE PDF EMBED)
+      case 11: // Slide 12: Legal Credentials: Lavish Enterprises ROC & PAN
         const leg3 = d.newAdditions.legalRegistrations[2];
         html = `
           <div class="slide-header">
             <span class="slide-tag">Legal Compliance</span>
-            <span class="slide-number">Slide 11 of 35</span>
+            <span class="slide-number">Slide 12 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">Legal Credentials: Lavish Enterprises</h2>
           <p class="slide-subtitle">Official MCA ROC Incorporation Certificate loaded directly on canvas with Govt PAN Card.</p>
@@ -668,7 +707,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff;">MCA ROC Certificate of Incorporation</h3>
                 <button onclick="openPdfModal('${leg3.file}', 'Lavish Enterprises ROC Certificate')" class="btn-primary" style="padding: 4px 10px; font-size: 0.75rem;">Fullscreen PDF →</button>
               </div>
-              <div style="width: 100%; height: 260px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 6px;">
+              <div style="width: 100%; height: 300px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 6px;">
                 <iframe src="${leg3.file}#toolbar=0" style="width: 100%; height: 100%; border: none;"></iframe>
               </div>
             </div>
@@ -679,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 Official Permanent Account Number (PAN) tax registration record for financial governance.
               </p>
               <div style="border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--purple); cursor: pointer; margin-top: 8px;" onclick="openImageModal('${leg3.panImg}', 'Lavish Enterprises Govt PAN Card')">
-                <img src="${leg3.panImg}" style="width: 100%; height: 180px; object-fit: cover;" alt="Lavish Enterprises PAN Card">
+                <img src="${leg3.panImg}" style="width: 100%; height: 200px; object-fit: cover;" alt="Lavish Enterprises PAN Card">
                 <div style="background: rgba(0,0,0,0.85); text-align: center; padding: 6px; font-size: 0.8rem; color: var(--purple); font-weight: 700;">
                   💳 Click to Enlarge Lavish Enterprises Govt PAN Card
                 </div>
@@ -886,50 +925,36 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 16: // Slide 17: Desktop Trackers, Extensions & Enterprise SOPs (INLINE PDF EMBEDS)
+      case 16: // Slide 17: Desktop Trackers & Enterprise SOPs
         const t2 = d.newAdditions.toolsAndUtilities.desktopTimeTracker;
-        const t3 = d.newAdditions.toolsAndUtilities.smartLinks;
         const t4 = d.newAdditions.toolsAndUtilities.skyeenet;
         html = `
           <div class="slide-header">
-            <span class="slide-tag">Desktop & Extension Utilities</span>
-            <span class="slide-number">Slide 17 of 35</span>
+            <span class="slide-tag">Desktop & Enterprise Utilities</span>
+            <span class="slide-number">Slide 17 of ${totalSlides}</span>
           </div>
-          <h2 class="slide-title">Desktop Trackers, Extensions & Enterprise SOPs</h2>
-          <p class="slide-subtitle">PHP desktop app spec & Skyeenet Enterprise SOP PDFs loaded directly on canvas.</p>
+          <h2 class="slide-title">Desktop Trackers & Enterprise SOPs</h2>
+          <p class="slide-subtitle">PHP desktop time tracker app & Skyeenet Enterprise SOP PDFs loaded directly on canvas.</p>
           
-          <div class="grid-3" style="margin-top: 14px;">
-            <div class="content-card asset-card" style="padding: 16px;">
+          <div class="grid-2" style="margin-top: 14px;">
+            <div class="content-card asset-card" style="padding: 20px;">
               <div>
                 <span class="product-badge" style="position: static; margin-bottom: 4px;">${t2.category}</span>
-                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff; margin-bottom: 2px;">${t2.name}</h3>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 6px;">${t2.desc}</p>
+                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff; margin-bottom: 4px;">${t2.name}</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">${t2.desc}</p>
               </div>
-              <div style="width: 100%; height: 200px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 4px;">
+              <div style="width: 100%; height: 280px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 6px;">
                 <iframe src="${t2.file}#toolbar=0" style="width: 100%; height: 100%; border: none;"></iframe>
               </div>
             </div>
 
-            <div class="content-card asset-card" style="padding: 16px;">
-              <div>
-                <span class="product-badge" style="position: static; margin-bottom: 4px;">${t3.category}</span>
-                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff; margin-bottom: 2px;">${t3.name}</h3>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px;">${t3.desc}</p>
-                <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr);">
-                  ${t3.screenshots.map((s, i) => `
-                    <img src="${s}" class="asset-thumb-lg" style="height: 80px;" alt="${t3.name}" onclick="openImageModal('${s}', '${t3.name}', ${JSON.stringify(t3.screenshots).replace(/"/g, '&quot;')}, ${i})">
-                  `).join('')}
-                </div>
-              </div>
-            </div>
-
-            <div class="content-card asset-card" style="padding: 16px;">
+            <div class="content-card asset-card" style="padding: 20px;">
               <div>
                 <span class="product-badge" style="position: static; margin-bottom: 4px;">${t4.category}</span>
-                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff; margin-bottom: 2px;">${t4.name}</h3>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 6px;">${t4.desc}</p>
+                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff; margin-bottom: 4px;">${t4.name}</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">${t4.desc}</p>
               </div>
-              <div style="width: 100%; height: 200px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 4px;">
+              <div style="width: 100%; height: 280px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); background: #fff; margin-top: 6px;">
                 <iframe src="${t4.file}#toolbar=0" style="width: 100%; height: 100%; border: none;"></iframe>
               </div>
             </div>
@@ -937,12 +962,35 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 17: // Slide 18: AI Motion Short: "im Moon" (5-FRAME GRID SETUP)
+      case 17: // Slide 18: Smart Links Chrome Extension (DEDICATED SLIDE)
+        const t3 = d.newAdditions.toolsAndUtilities.smartLinks;
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Browser Extension</span>
+            <span class="slide-number">Slide 18 of ${totalSlides}</span>
+          </div>
+          <h2 class="slide-title">Smart Links Chrome Extension</h2>
+          <p class="slide-subtitle">Browser extension for quick URL shortening, smart redirection & instant analytics. Click any image to browse in lightbox.</p>
+          
+          <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 18px;">
+            ${t3.screenshots.map((s, i) => `
+              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${s}', 'Smart Links Chrome Extension View ${i+1}', ${JSON.stringify(t3.screenshots).replace(/"/g, '&quot;')}, ${i})">
+                <img src="${s}" class="asset-thumb-lg" style="height: 250px; object-fit: contain; background: rgba(0,0,0,0.5);" alt="Smart Links View ${i+1}">
+                <div style="background: rgba(0,0,0,0.85); text-align: center; padding: 6px; font-size: 0.8rem; color: var(--cyan); font-weight: 600;">
+                  Extension Screen ${i+1}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        break;
+
+      case 18: // Slide 19: AI Motion Short: "im Moon" (5-FRAME GRID SETUP)
         const moonImages = d.newAdditions.aiCreativeMedia.imMoon;
         html = `
           <div class="slide-header">
             <span class="slide-tag">Generative AI Media</span>
-            <span class="slide-number">Slide 18 of 35</span>
+            <span class="slide-number">Slide 19 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">AI Motion Short: "im Moon"</h2>
           <p class="slide-subtitle">Cinematic generative AI visual short. 5 high-resolution key visual frames. Click any frame to browse in lightbox.</p>
@@ -960,12 +1008,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 18: // Slide 19: AI Motion Short: "Thukalgal" (5-FRAME GRID SETUP)
+      case 19: // Slide 20: AI Motion Short: "Thukalgal" (5-FRAME GRID SETUP)
         const thukalgalImages = d.newAdditions.aiCreativeMedia.thukalgal;
         html = `
           <div class="slide-header">
             <span class="slide-tag">Generative AI Media</span>
-            <span class="slide-number">Slide 19 of 35</span>
+            <span class="slide-number">Slide 20 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">AI Motion Short: "Thukalgal"</h2>
           <p class="slide-subtitle">Atmospheric generative AI visual short. 5 large cinematic key frames. Click any frame to browse in lightbox.</p>
@@ -983,14 +1031,14 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 19: // Slide 20: AI Motion Shorts: Kavasam, Signout & Valaiyosai
+      case 20: // Slide 21: AI Motion Shorts: Kavasam, Signout & Valaiyosai
         const kavasam = d.newAdditions.aiCreativeMedia.kavasam;
         const signout = d.newAdditions.aiCreativeMedia.signout;
         const valaiyosai = d.newAdditions.aiCreativeMedia.valaiyosai;
         html = `
           <div class="slide-header">
             <span class="slide-tag">Generative AI Visual Shorts</span>
-            <span class="slide-number">Slide 20 of 35</span>
+            <span class="slide-number">Slide 21 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">AI Motion Shorts: Kavasam, Signout & Valaiyosai</h2>
           <p class="slide-subtitle">High-resolution cinematic visual posters & keyframes. Click any poster to open lightbox gallery.</p>
@@ -1026,12 +1074,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 20: // Slide 21: AI Wedding Story Simulations (Part 1 - 3 Big Visual Frames)
+      case 21: // Slide 22: AI Wedding Story Simulations (Part 1 - 3 Big Visual Frames)
         const wed1 = d.newAdditions.aiCreativeMedia.weddingSimulationsPart1;
         html = `
           <div class="slide-header">
             <span class="slide-tag">AI Character Consistency</span>
-            <span class="slide-number">Slide 21 of 35</span>
+            <span class="slide-number">Slide 22 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">AI Wedding Story Simulations (Part 1)</h2>
           <p class="slide-subtitle">Photorealistic AI character consistency & storytelling simulations. 3 Large side-by-side high-res frames.</p>
@@ -1049,12 +1097,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 21: // Slide 22: AI Wedding Story Simulations (Part 2 - 3 Big Visual Frames)
+      case 22: // Slide 23: AI Wedding Story Simulations (Part 2 - 3 Big Visual Frames)
         const wed2 = d.newAdditions.aiCreativeMedia.weddingSimulationsPart2;
         html = `
           <div class="slide-header">
             <span class="slide-tag">AI Character Consistency</span>
-            <span class="slide-number">Slide 22 of 35</span>
+            <span class="slide-number">Slide 23 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">AI Wedding Story Simulations (Part 2)</h2>
           <p class="slide-subtitle">Photorealistic AI character consistency & storytelling simulations. 3 Large side-by-side high-res frames.</p>
@@ -1072,12 +1120,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 22: // Slide 23: Video Editing & Visual Remixes (3 Big Frames)
+      case 23: // Slide 24: Video Editing & Visual Remixes (3 Big Frames)
         const remixList = d.newAdditions.aiCreativeMedia.remixes;
         html = `
           <div class="slide-header">
             <span class="slide-tag">Creative Media</span>
-            <span class="slide-number">Slide 23 of 35</span>
+            <span class="slide-number">Slide 24 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">Video Editing & Visual Remixes</h2>
           <p class="slide-subtitle">Creative video editing, composite keying, and audio-visual remixes.</p>
@@ -1095,13 +1143,59 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 23: // Slide 24: Process Automation: n8n, MS Access & Publishing
+      case 24: // Slide 25: n8n Workflow Automations (DEDICATED SLIDE)
+        const n8nImgs = d.newAdditions.aiCreativeMedia.n8nScreenshots;
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Process Automation</span>
+            <span class="slide-number">Slide 25 of ${totalSlides}</span>
+          </div>
+          <h2 class="slide-title">n8n Workflow Automations</h2>
+          <p class="slide-subtitle">Zero-touch webhook pipelines, automated email triggers, database sync & multi-service orchestrations. Click any workflow to open lightbox.</p>
+          
+          <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 18px;">
+            ${n8nImgs.map((img, i) => `
+              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${img}', 'n8n Workflow Automation ${i+1}', ${JSON.stringify(n8nImgs).replace(/"/g, '&quot;')}, ${i})">
+                <img src="${img}" class="asset-thumb-lg" style="height: 250px; object-fit: cover;" alt="n8n Workflow ${i+1}">
+                <div style="background: rgba(0,0,0,0.85); text-align: center; padding: 6px; font-size: 0.8rem; color: var(--cyan); font-weight: 600;">
+                  n8n Workflow ${i+1}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        break;
+
+      case 25: // Slide 26: Digital & Magazine Publishing Works (DEDICATED SLIDE)
+        const magImgs = d.newAdditions.aiCreativeMedia.magazineWorks;
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Corporate Publishing</span>
+            <span class="slide-number">Slide 26 of ${totalSlides}</span>
+          </div>
+          <h2 class="slide-title">Digital & Magazine Publishing Works</h2>
+          <p class="slide-subtitle">Publication-grade magazine typography, ignition system engineering covers & digital media releases. Click any issue to browse lightbox.</p>
+          
+          <div class="asset-thumb-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 18px;">
+            ${magImgs.map((img, i) => `
+              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${img}', 'Magazine Publishing Issue ${i+1}', ${JSON.stringify(magImgs).replace(/"/g, '&quot;')}, ${i})">
+                <img src="${img}" class="asset-thumb-lg" style="height: 260px; object-fit: contain; background: rgba(0,0,0,0.5);" alt="Magazine Issue ${i+1}">
+                <div style="background: rgba(0,0,0,0.85); text-align: center; padding: 8px; font-size: 0.85rem; color: var(--cyan); font-weight: 600;">
+                  Publication Cover / Page ${i+1}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        break;
+
+      case 26: // Slide 27: Enterprise Process Automation & MS Access Tools
         html = `
           <div class="slide-header">
             <span class="slide-tag">Enterprise Operations</span>
-            <span class="slide-number">Slide 24 of 35</span>
+            <span class="slide-number">Slide 27 of ${totalSlides}</span>
           </div>
-          <h2 class="slide-title">Process Automation & Digital Publishing</h2>
+          <h2 class="slide-title">Enterprise Process Automation & MS Access Tools</h2>
           <p class="slide-subtitle">n8n zero-touch workflow engines, MS Access operational database tools & publication-grade document design.</p>
           
           <div class="grid-3" style="margin-top: 16px;">
@@ -1119,14 +1213,14 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
 
       // ============================================================
-      // EXISTING PORTFOLIO & ROADMAP SLIDES (SLIDES 25 - 35)
+      // EXISTING PORTFOLIO & ROADMAP SLIDES (SLIDES 28 - 39)
       // ============================================================
 
-      case 24: // Slide 25: Product Portfolio Overview
+      case 27: // Slide 28: Product Portfolio Overview
         html = `
           <div class="slide-header">
             <span class="slide-tag">Product Ecosystem</span>
-            <span class="slide-number">Slide 25 of 35</span>
+            <span class="slide-number">Slide 28 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">Product Portfolio Overview</h2>
           <p class="slide-subtitle">5 Core Pillars powering business productivity, financial tracking, learning, and MIS intelligence.</p>
@@ -1146,19 +1240,19 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 25: // Slide 26: Orbita Showcase
-        html = renderProductSlide(d.products[0], 26);
+      case 28: // Slide 29: Orbita Showcase
+        html = renderProductSlide(d.products[0], 29);
         break;
 
-      case 26: // Slide 27: PowerBooks Showcase
-        html = renderProductSlide(d.products[1], 27);
+      case 29: // Slide 30: PowerBooks Showcase
+        html = renderProductSlide(d.products[1], 30);
         break;
 
-      case 27: // Slide 28: MoneyMatrix Spotlight (WHITE BACKGROUND BEHIND LOGO)
+      case 30: // Slide 31: MoneyMatrix Spotlight
         html = `
           <div class="slide-header">
             <span class="slide-tag">Product Rebrand & Spotlight</span>
-            <span class="slide-number">Slide 28 of 35</span>
+            <span class="slide-number">Slide 31 of ${totalSlides}</span>
           </div>
           <div class="product-spotlight">
             <div class="product-info">
@@ -1200,19 +1294,19 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 28: // Slide 29: ISPARK Spotlight
-        html = renderProductSlide(d.products[3], 29);
+      case 31: // Slide 32: ISPARK Spotlight
+        html = renderProductSlide(d.products[3], 32);
         break;
 
-      case 29: // Slide 30: MIS Services Spotlight
-        html = renderProductSlide(d.products[4], 30);
+      case 32: // Slide 33: MIS Services Spotlight
+        html = renderProductSlide(d.products[4], 33);
         break;
 
-      case 30: // Slide 31: 5-Year Roadmap
+      case 33: // Slide 34: 5-Year Roadmap
         html = `
           <div class="slide-header">
             <span class="slide-tag">Strategic Vision</span>
-            <span class="slide-number">Slide 31 of 35</span>
+            <span class="slide-number">Slide 34 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">5-Year Strategic Product & Execution Roadmap</h2>
           <p class="slide-subtitle">Phased execution matrix from 2026 foundation through 2030+ industry leadership.</p>
@@ -1230,11 +1324,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 31: // Slide 32: Product Strategy Matrix
+      case 34: // Slide 35: Product Strategy Matrix
         html = `
           <div class="slide-header">
             <span class="slide-tag">Market Strategy</span>
-            <span class="slide-number">Slide 32 of 35</span>
+            <span class="slide-number">Slide 35 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">Product Strategy Matrix</h2>
           <p class="slide-subtitle">Targeted solutions engineered for enterprise MIS, retail analytics, and BFSI operations.</p>
@@ -1267,11 +1361,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 32: // Slide 33: Team & Core Community Roster
+      case 35: // Slide 36: Team & Core Community Roster
         html = `
           <div class="slide-header">
             <span class="slide-tag">Member Presentations</span>
-            <span class="slide-number">Slide 33 of 35</span>
+            <span class="slide-number">Slide 36 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title" style="margin-bottom: 4px;">Team & Core Community Roster</h2>
           <p class="slide-subtitle" style="margin-bottom: 16px;">Click any team member card to view their profession-tailored presentation content & talk track.</p>
@@ -1318,11 +1412,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 33: // Slide 34: Quarterly Rhythm & Objectives
+      case 36: // Slide 37: Quarterly Rhythm & Objectives
         html = `
           <div class="slide-header">
             <span class="slide-tag">Operational Rhythm</span>
-            <span class="slide-number">Slide 34 of 35</span>
+            <span class="slide-number">Slide 37 of ${totalSlides}</span>
           </div>
           <h2 class="slide-title">Quarterly Rhythm & Strategic Alignment</h2>
           <p class="slide-subtitle">Runit Onevia Annual Flagship + Runit Nextora Quarterly Sprint Engine.</p>
@@ -1344,11 +1438,40 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 34: // Slide 35: Thank You & Grand Finale
+      case 37: // Slide 38: Strategic Summary & Objectives
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Strategic Execution</span>
+            <span class="slide-number">Slide 38 of ${totalSlides}</span>
+          </div>
+          <h2 class="slide-title">Immediate Objectives & Post-Event Goals</h2>
+          <p class="slide-subtitle">Next steps immediately following Runit Onevia 2026.</p>
+          <div class="grid-2" style="margin-top: 10px;">
+            <div class="content-card">
+              <h3 style="color: var(--cyan); font-family: var(--font-heading); margin-bottom: 12px;"><i data-lucide="target"></i> Immediate Post-Event Goals</h3>
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                ${d.immediateObjectives.map(obj => `
+                  <li style="display: flex; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+                    <i data-lucide="check" style="color: var(--emerald); flex-shrink: 0;"></i> ${obj}
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+            <div class="content-card" style="border-left: 4px solid var(--gold);">
+              <h3 style="color: var(--gold); font-family: var(--font-heading); margin-bottom: 8px;">Runit Ecosystem Synergy</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                Seamless integration across SaaS platforms, retail partners, and AI automation engines to deliver end-to-end business value.
+              </p>
+            </div>
+          </div>
+        `;
+        break;
+
+      case 38: // Slide 39: Thank You & Grand Finale
         html = `
           <div class="slide-header">
             <span class="slide-tag">Grand Finale</span>
-            <span class="slide-number">Slide 35 of 35</span>
+            <span class="slide-number">Slide 39 of ${totalSlides}</span>
           </div>
           <div style="text-align: center; margin: auto 0;">
             <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 12px;">
@@ -1386,7 +1509,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return `
       <div class="slide-header">
         <span class="slide-tag">Product Showcase</span>
-        <span class="slide-number">Slide ${slideNum} of 35</span>
+        <span class="slide-number">Slide ${slideNum} of ${totalSlides}</span>
       </div>
       <div class="product-spotlight">
         <div class="product-info">

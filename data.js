@@ -48,7 +48,7 @@ const EVENT_DATA = {
 
   // BRAND LOGOS ECOSYSTEM
   brandLogos: [
-    { name: "Runit Infotech", logo: "assets/Runit logo pack/primary-logo-light.png", category: "Parent Entity" },
+    { name: "Runit Infotech", logo: "assets/Runit logo pack/primary-logo.png", category: "Parent Entity" },
     { name: "Orbita", logo: "assets/other brands/orbita.svg", category: "SaaS Platform" },
     { name: "PowerBooks", logo: "assets/other brands/powerbooks-logo.png", category: "Productivity Engine" },
     { name: "MoneyMatrix", logo: "assets/Money Matrix/Logo Exports/4x/Asset 2@4x.png", category: "Financial App" },
@@ -259,6 +259,15 @@ const EVENT_DATA = {
         "assets/video editing remix (1).png",
         "assets/video editing remix (2).png",
         "assets/video editing remix (3).png"
+      ],
+      magazineWorks: [
+        "assets/magazine - IGNITION SYSTEM.png",
+        "assets/Magazine Take Off.jpg"
+      ],
+      n8nScreenshots: [
+        "assets/N8n Automations (1).png",
+        "assets/N8n Automations (3).png",
+        "assets/N8n Automations (4).png"
       ]
     },
 
