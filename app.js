@@ -1597,22 +1597,65 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mouse Scroll / Trackpad Navigation
+  // Mouse Scroll / Trackpad & Touch Gesture Navigation
   let isScrolling = false;
   window.addEventListener('wheel', (e) => {
     if (currentViewMode !== 'deck') return;
     if (document.querySelector('.modal-backdrop.active')) return;
 
+    // Allow internal scroll inside scrollable cards when not at boundary
+    const scrollable = e.target ? e.target.closest('.team-card, [style*="overflow-y: auto"], [style*="overflow: auto"]') : null;
+    if (scrollable) {
+      const isAtBottom = scrollable.scrollHeight - scrollable.scrollTop <= scrollable.clientHeight + 5;
+      const isAtTop = scrollable.scrollTop <= 5;
+      if (e.deltaY > 0 && !isAtBottom) return;
+      if (e.deltaY < 0 && !isAtTop) return;
+    }
+
     if (isScrolling) return;
 
-    if (e.deltaY > 20) {
+    if (e.deltaY > 5) {
       isScrolling = true;
       goToSlide(currentSlideIndex + 1);
-      setTimeout(() => { isScrolling = false; }, 400);
-    } else if (e.deltaY < -20) {
+      setTimeout(() => { isScrolling = false; }, 300);
+    } else if (e.deltaY < -5) {
       isScrolling = true;
       goToSlide(currentSlideIndex - 1);
-      setTimeout(() => { isScrolling = false; }, 400);
+      setTimeout(() => { isScrolling = false; }, 300);
+    }
+  }, { passive: true });
+
+  // Touch Swipe Support for Touchpads and Mobile Devices
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (currentViewMode !== 'deck') return;
+    if (document.querySelector('.modal-backdrop.active')) return;
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+
+    const diffY = touchStartY - e.changedTouches[0].clientY;
+    const diffX = touchStartX - e.changedTouches[0].clientX;
+
+    if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 30) {
+      if (diffY > 0) {
+        goToSlide(currentSlideIndex + 1);
+      } else {
+        goToSlide(currentSlideIndex - 1);
+      }
+    } else if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+      if (diffX > 0) {
+        goToSlide(currentSlideIndex + 1);
+      } else {
+        goToSlide(currentSlideIndex - 1);
+      }
     }
   }, { passive: true });
 
