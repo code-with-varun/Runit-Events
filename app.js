@@ -268,6 +268,89 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) lucide.createIcons();
   }
 
+  // Global Carousel State Management
+  window.carouselState = window.carouselState || {};
+
+  window.changeCarouselIndex = function(carouselId, delta, count) {
+    const current = window.carouselState[carouselId] || 0;
+    const next = (current + delta + count) % count;
+    window.setCarouselIndex(carouselId, next, count);
+  };
+
+  window.setCarouselIndex = function(carouselId, index, count) {
+    window.carouselState[carouselId] = index;
+    const mainImg = document.getElementById(`carousel-${carouselId}-img`);
+    const badge = document.getElementById(`carousel-${carouselId}-badge`);
+    if (!mainImg) return;
+
+    mainImg.style.opacity = '0.3';
+    mainImg.style.transform = 'scale(0.98)';
+
+    setTimeout(() => {
+      try {
+        const imagesJson = mainImg.getAttribute('data-images') || '[]';
+        const images = JSON.parse(imagesJson);
+        if (images[index]) {
+          mainImg.src = images[index];
+        }
+      } catch(e) {}
+      mainImg.style.opacity = '1';
+      mainImg.style.transform = 'scale(1)';
+    }, 80);
+
+    if (badge && count) {
+      badge.textContent = `${index + 1} / ${count}`;
+    }
+
+    for (let i = 0; i < count; i++) {
+      const thumb = document.getElementById(`carousel-${carouselId}-thumb-${i}`);
+      if (thumb) {
+        if (i === index) thumb.classList.add('active');
+        else thumb.classList.remove('active');
+      }
+    }
+  };
+
+  function renderImageCarousel(images, carouselId, title, stageHeight = '230px') {
+    if (!images || !images.length) return '';
+    const initialIndex = window.carouselState[carouselId] || 0;
+    const imagesJson = JSON.stringify(images).replace(/"/g, '&quot;');
+
+    return `
+      <div class="carousel-container" id="carousel-${carouselId}" style="margin-top: 8px;">
+        <div class="carousel-stage" style="position: relative; height: ${stageHeight}; border-radius: var(--radius-md); overflow: hidden; background: rgba(5,8,17,0.85); border: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: center;">
+          <button class="carousel-btn carousel-btn-prev" onclick="event.stopPropagation(); changeCarouselIndex('${carouselId}', -1, ${images.length})" title="Previous Image (<)">
+            <i data-lucide="chevron-left"></i>
+          </button>
+          
+          <img id="carousel-${carouselId}-img" 
+               src="${images[initialIndex]}" 
+               data-images="${imagesJson}"
+               class="carousel-img" 
+               style="max-height: ${stageHeight}; max-width: 100%; object-fit: contain; cursor: pointer; transition: opacity 0.2s ease, transform 0.2s ease;"
+               onclick="openImageModal(this.src, '${title} — Image ' + ((window.carouselState['${carouselId}'] || 0) + 1))" 
+               alt="${title}">
+
+          <button class="carousel-btn carousel-btn-next" onclick="event.stopPropagation(); changeCarouselIndex('${carouselId}', 1, ${images.length})" title="Next Image (>)">
+            <i data-lucide="chevron-right"></i>
+          </button>
+
+          <span class="carousel-badge" id="carousel-${carouselId}-badge">${initialIndex + 1} / ${images.length}</span>
+        </div>
+
+        <div class="carousel-thumb-bar">
+          ${images.map((img, i) => `
+            <img src="${img}" 
+                 class="carousel-thumb ${i === initialIndex ? 'active' : ''}" 
+                 id="carousel-${carouselId}-thumb-${i}" 
+                 onclick="event.stopPropagation(); setCarouselIndex('${carouselId}', ${i}, ${images.length})" 
+                 alt="Thumbnail ${i + 1}">
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   function renderSlide(index) {
     let html = '';
     const d = EVENT_DATA;
@@ -280,6 +363,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 1 of 34</span>
           </div>
           <div style="text-align: center; margin: auto 0;">
+            <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+              <img src="assets/Runit logo pack/primary-logo-light.png" alt="Runit Infotech Logo" style="height: 65px; object-fit: contain; filter: drop-shadow(0 0 12px var(--cyan));" onerror="this.style.display='none'">
+            </div>
             <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; color: var(--cyan); text-transform: uppercase; margin-bottom: 12px;">
               RUNIT INFOTECH
             </div>
@@ -395,21 +481,33 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-tag">Company Vision</span>
             <span class="slide-number">Slide 5 of 34</span>
           </div>
-          <h2 class="slide-title">About Runit Infotech & Focus Areas</h2>
-          <p class="slide-subtitle">A product-focused initiative building scalable solutions across 7 technology domains.</p>
-          <div class="grid-4" style="margin-top: 10px;">
+          <h2 class="slide-title">About Runit Infotech & Brand Ecosystem</h2>
+          <p class="slide-subtitle">A product-focused initiative building scalable solutions across 7 technology domains & partner brands.</p>
+          <div class="grid-4" style="margin-top: 8px;">
             ${d.focusAreas.map(f => `
-              <div class="content-card" style="text-align: center; padding: 16px 12px;">
-                <div style="width: 42px; height: 42px; background: rgba(0,242,254,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto; color: var(--cyan);">
+              <div class="content-card" style="text-align: center; padding: 10px 8px;">
+                <div style="width: 36px; height: 36px; background: rgba(0,242,254,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px auto; color: var(--cyan);">
                   <i data-lucide="${f.icon}"></i>
                 </div>
-                <h4 style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px;">${f.name}</h4>
-                <p style="font-size: 0.78rem; color: var(--text-muted);">${f.desc}</p>
+                <h4 style="font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 2px;">${f.name}</h4>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">${f.desc}</p>
               </div>
             `).join('')}
           </div>
-          <div style="margin-top: 20px; background: var(--gradient-cyan-purple); padding: 14px; border-radius: var(--radius-md); text-align: center; font-family: var(--font-heading); font-weight: 800; font-size: 1.15rem; color: #fff; letter-spacing: 1px;">
-            Long-Term Vision: MIS + Automation + AI + SaaS + Business Solutions
+
+          <!-- Brand Ecosystem Showcase Ribbon -->
+          <div style="margin-top: 14px; background: rgba(16,23,42,0.8); border: 1px solid var(--border-glass); padding: 12px 16px; border-radius: var(--radius-md);">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+              ✨ Runit Brand & Partner Ecosystem
+            </div>
+            <div style="display: flex; gap: 14px; overflow-x: auto; align-items: center; padding-bottom: 4px;">
+              ${d.brandLogos.map(b => `
+                <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); padding: 6px 12px; border-radius: var(--radius-sm);" title="${b.name} (${b.category})">
+                  <img src="${b.logo}" style="height: 28px; max-width: 90px; object-fit: contain;" alt="${b.name}" onerror="this.style.display='none'">
+                  <span style="font-size: 0.7rem; color: var(--text-secondary); margin-top: 2px;">${b.name}</span>
+                </div>
+              `).join('')}
+            </div>
           </div>
         `;
         break;
@@ -517,7 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="slide-subtitle">Official Govt of India MSME Udyam Certificate & MCA Incorporation Credentials.</p>
           
           <div class="grid-2" style="margin-top: 16px;">
-            <div class="content-card asset-card" style="padding: 24px;">
+            <div class="content-card asset-card" style="padding: 22px;">
               <div>
                 <span class="product-badge" style="position: static; display: inline-block; margin-bottom: 8px;">${leg1.category}</span>
                 <h3 style="font-family: var(--font-heading); font-size: 1.3rem; color: #fff; margin-bottom: 6px;">${leg1.title}</h3>
@@ -529,20 +627,22 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </div>
 
-            <div class="content-card asset-card" style="padding: 24px;">
+            <div class="content-card asset-card" style="padding: 22px;">
               <div>
                 <span class="product-badge" style="position: static; display: inline-block; margin-bottom: 8px;">${leg2.category}</span>
-                <h3 style="font-family: var(--font-heading); font-size: 1.3rem; color: #fff; margin-bottom: 6px;">${leg2.title}</h3>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">${leg2.desc}</p>
+                <h3 style="font-family: var(--font-heading); font-size: 1.3rem; color: #fff; margin-bottom: 4px;">${leg2.title}</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 12px;">${leg2.desc}</p>
               </div>
               <div style="display: flex; flex-direction: column; gap: 10px;">
-                <div class="pdf-preview-box" onclick="openPdfModal('${leg2.file}', '${leg2.title}')">
+                <div class="pdf-preview-box" onclick="openPdfModal('${leg2.file}', '${leg2.title}')" style="margin-top: 0;">
                   <i data-lucide="file-text" style="color: var(--cyan); width: 24px; height: 24px;"></i>
                   <div style="font-size: 0.9rem; color: #fff; font-weight: 600;">View MCA ROC Certificate (PDF)</div>
                 </div>
-                <div class="pdf-preview-box" style="border-color: var(--purple);" onclick="openPdfModal('${leg2.panFile}', '${leg2.title} - PAN')">
-                  <i data-lucide="credit-card" style="color: var(--purple); width: 24px; height: 24px;"></i>
-                  <div style="font-size: 0.9rem; color: #fff; font-weight: 600;">View PAN Card Document (PDF)</div>
+                <div style="border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glow); cursor: pointer;" onclick="openImageModal('${leg2.panImg}', 'Lavish Dreamers Govt PAN Card')">
+                  <img src="${leg2.panImg}" style="width: 100%; height: 110px; object-fit: cover;" alt="Lavish Dreamers PAN Card">
+                  <div style="background: rgba(0,0,0,0.8); text-align: center; padding: 4px; font-size: 0.78rem; color: var(--cyan); font-weight: 600;">
+                    💳 Click to Enlarge Lavish Dreamers Govt PAN Card
+                  </div>
                 </div>
               </div>
             </div>
@@ -558,28 +658,30 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 10 of 34</span>
           </div>
           <h2 class="slide-title">Legal Credentials: Lavish Enterprises</h2>
-          <p class="slide-subtitle">Official Ministry of Corporate Affairs (MCA) ROC Incorporation & Govt PAN Card Documents.</p>
+          <p class="slide-subtitle">Official Ministry of Corporate Affairs (MCA) ROC Incorporation & Govt PAN Card Credentials.</p>
           
-          <div class="grid-2" style="margin-top: 20px;">
-            <div class="content-card asset-card" style="padding: 28px;">
-              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 8px;">MCA ROC Certificate of Incorporation</h3>
-              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
-                Official ROC Registration Certificate establishing business identity, entity status, and compliance.
+          <div class="grid-2" style="margin-top: 16px;">
+            <div class="content-card asset-card" style="padding: 24px;">
+              <h3 style="font-family: var(--font-heading); font-size: 1.3rem; color: #fff; margin-bottom: 6px;">MCA ROC Certificate of Incorporation</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">
+                Official ROC Registration Certificate establishing business identity, entity status, and corporate compliance.
               </p>
               <div class="pdf-preview-box" onclick="openPdfModal('${leg3.file}', 'Lavish Enterprises ROC Certificate')">
                 <i data-lucide="shield-check" style="color: var(--cyan); width: 32px; height: 32px;"></i>
-                <div style="font-size: 1rem; color: #fff; font-weight: 700;">Open MCA ROC Certificate (PDF)</div>
+                <div style="font-size: 0.95rem; color: #fff; font-weight: 700;">Open MCA ROC Certificate (PDF)</div>
               </div>
             </div>
 
-            <div class="content-card asset-card" style="padding: 28px;">
-              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 8px;">Government PAN Card Identification</h3>
-              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+            <div class="content-card asset-card" style="padding: 24px;">
+              <h3 style="font-family: var(--font-heading); font-size: 1.3rem; color: #fff; margin-bottom: 6px;">Government PAN Card Identification</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
                 Official Permanent Account Number (PAN) tax registration record for financial governance.
               </p>
-              <div class="pdf-preview-box" style="border-color: var(--purple);" onclick="openPdfModal('${leg3.panFile}', 'Lavish Enterprises PAN Document')">
-                <i data-lucide="credit-card" style="color: var(--purple); width: 32px; height: 32px;"></i>
-                <div style="font-size: 1rem; color: #fff; font-weight: 700;">Open Lavish Enterprises PAN (PDF)</div>
+              <div style="border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--purple); cursor: pointer;" onclick="openImageModal('${leg3.panImg}', 'Lavish Enterprises Govt PAN Card')">
+                <img src="${leg3.panImg}" style="width: 100%; height: 130px; object-fit: cover;" alt="Lavish Enterprises PAN Card">
+                <div style="background: rgba(0,0,0,0.85); text-align: center; padding: 6px; font-size: 0.8rem; color: var(--purple); font-weight: 700;">
+                  💳 Click to Enlarge Lavish Enterprises Govt PAN Card
+                </div>
               </div>
             </div>
           </div>
@@ -631,7 +733,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="content-card asset-card" style="padding: 24px;">
               <div>
                 <span class="product-badge" style="position: static; display: inline-block; margin-bottom: 8px;">${p1.category}</span>
-                <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 6px;">${p1.name}</h3>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                  <img src="${p1.logo}" style="height: 32px; object-fit: contain;" alt="MoneyMatrix Logo">
+                  <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff;">${p1.name}</h3>
+                </div>
                 <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">${p1.desc}</p>
                 <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;">
                   ${p1.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
@@ -645,7 +750,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="content-card asset-card" style="padding: 24px;">
               <div>
                 <span class="product-badge" style="position: static; display: inline-block; margin-bottom: 8px;">${p2.category}</span>
-                <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 6px;">${p2.name}</h3>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                  <img src="${p2.logo}" style="height: 32px; object-fit: contain;" alt="Orbita Logo">
+                  <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff;">${p2.name}</h3>
+                </div>
                 <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">${p2.desc}</p>
                 <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;">
                   ${p2.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
@@ -668,36 +776,31 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 13 of 34</span>
           </div>
           <h2 class="slide-title">Live Applications: ScripVault & Lavish Dreamers</h2>
-          <p class="slide-subtitle">Cloud snippet vault & direct-to-consumer e-commerce brand platform with production URLs.</p>
+          <p class="slide-subtitle">Cloud snippet vault & direct-to-consumer e-commerce brand platform with interactive image sliders.</p>
           
-          <div class="grid-2" style="margin-top: 14px;">
-            <div class="content-card asset-card" style="padding: 20px;">
+          <div class="grid-2" style="margin-top: 12px;">
+            <div class="content-card asset-card" style="padding: 16px;">
               <div>
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                  <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff;">${p3.name}</h3>
-                  <a href="${p3.link}" target="_blank" class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem; text-decoration: none;">Live Site →</a>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff;">${p3.name}</h3>
+                  <a href="${p3.link}" target="_blank" class="btn-primary" style="padding: 4px 12px; font-size: 0.78rem; text-decoration: none;">Live Site →</a>
                 </div>
-                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">${p3.desc}</p>
-                <div class="asset-thumb-grid">
-                  ${p3.screenshots.map(s => `
-                    <img src="${s}" class="asset-thumb-lg" style="height: 130px;" alt="${p3.name}" onclick="openImageModal('${s}', '${p3.name}')">
-                  `).join('')}
-                </div>
+                <p style="font-size: 0.82rem; color: var(--text-secondary);">${p3.desc}</p>
+                ${renderImageCarousel(p3.screenshots, 'scripvault', 'ScripVault', '150px')}
               </div>
             </div>
 
-            <div class="content-card asset-card" style="padding: 20px;">
+            <div class="content-card asset-card" style="padding: 16px;">
               <div>
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                  <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff;">${p4.name}</h3>
-                  <a href="${p4.link}" target="_blank" class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem; text-decoration: none;">Live Site →</a>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <img src="${p4.logo}" style="height: 24px; object-fit: contain;" alt="Lavish Dreamers Logo" onerror="this.style.display='none'">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff;">${p4.name}</h3>
+                  </div>
+                  <a href="${p4.link}" target="_blank" class="btn-primary" style="padding: 4px 12px; font-size: 0.78rem; text-decoration: none;">Live Site →</a>
                 </div>
-                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">${p4.desc}</p>
-                <div class="asset-thumb-grid">
-                  ${p4.screenshots.map(s => `
-                    <img src="${s}" class="asset-thumb-lg" style="height: 130px;" alt="${p4.name}" onclick="openImageModal('${s}', '${p4.name}')">
-                  `).join('')}
-                </div>
+                <p style="font-size: 0.82rem; color: var(--text-secondary);">${p4.desc}</p>
+                ${renderImageCarousel(p4.screenshots, 'lavishdreamers', 'Lavish Dreamers', '150px')}
               </div>
             </div>
           </div>
@@ -715,23 +818,19 @@ document.addEventListener('DOMContentLoaded', () => {
           <h2 class="slide-title">Runit Games Suite & Developer Portfolio</h2>
           <p class="slide-subtitle">Interactive browser gaming suite & personal developer portfolio site.</p>
           
-          <div class="grid-2" style="margin-top: 14px;">
-            <div class="content-card asset-card" style="padding: 20px;">
+          <div class="grid-2" style="margin-top: 12px;">
+            <div class="content-card asset-card" style="padding: 16px;">
               <div>
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                  <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff;">${p5.name}</h3>
-                  <a href="${p5.link}" target="_blank" class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem; text-decoration: none;">Open Game Suite →</a>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #fff;">${p5.name}</h3>
+                  <a href="${p5.link}" target="_blank" class="btn-primary" style="padding: 4px 12px; font-size: 0.78rem; text-decoration: none;">Open Game Suite →</a>
                 </div>
-                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">${p5.desc}</p>
-                <div class="asset-thumb-grid">
-                  ${p5.screenshots.map(s => `
-                    <img src="${s}" class="asset-thumb-lg" style="height: 130px;" alt="${p5.name}" onclick="openImageModal('${s}', '${p5.name}')">
-                  `).join('')}
-                </div>
+                <p style="font-size: 0.82rem; color: var(--text-secondary);">${p5.desc}</p>
+                ${renderImageCarousel(p5.screenshots, 'runitgames', 'Runit Games Hub', '150px')}
               </div>
             </div>
 
-            <div class="content-card asset-card" style="padding: 24px;">
+            <div class="content-card asset-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <span class="product-badge" style="position: static; display: inline-block; margin-bottom: 8px;">${p6.category}</span>
                 <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 6px;">${p6.name}</h3>
@@ -745,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 14: // Slide 15: Personal Finance Excel Dashboard (Big 5-Screen Preview)
+      case 14: // Slide 15: Personal Finance Excel Dashboard (Interactive 5-Screen Carousel)
         const fin = d.newAdditions.toolsAndUtilities.excelDashboard;
         html = `
           <div class="slide-header">
@@ -753,18 +852,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 15 of 34</span>
           </div>
           <h2 class="slide-title">Personal Finance Excel Dashboard</h2>
-          <p class="slide-subtitle">${fin.desc}</p>
+          <p class="slide-subtitle">${fin.desc} Navigate left/right below for fast smooth presentation.</p>
           
-          <div class="asset-thumb-grid" style="grid-template-columns: repeat(5, 1fr); margin-top: 18px;">
-            ${fin.screenshots.map((s, i) => `
-              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${s}', 'Personal Finance Dashboard View ${i+1}')">
-                <img src="${s}" class="asset-thumb-lg" style="height: 230px;" alt="Personal Finance View ${i+1}">
-                <div style="background: rgba(0,0,0,0.8); text-align: center; padding: 6px; font-size: 0.78rem; color: var(--cyan); font-weight: 600;">
-                  Dashboard Screen ${i+1}
-                </div>
-              </div>
-            `).join('')}
-          </div>
+          ${renderImageCarousel(fin.screenshots, 'finance', 'Personal Finance Excel Dashboard', '270px')}
         `;
         break;
 
@@ -780,7 +870,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <h2 class="slide-title">Desktop Trackers, Extensions & Enterprise SOPs</h2>
           <p class="slide-subtitle">PHP desktop app, Smart Links Chrome Extension & Skyeenet Enterprise System SOPs.</p>
           
-          <div class="grid-3" style="margin-top: 14px;">
+          <div class="grid-3" style="margin-top: 12px;">
             <div class="content-card asset-card">
               <div>
                 <span class="product-badge" style="position: static; margin-bottom: 6px;">${t2.category}</span>
@@ -795,14 +885,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <div class="content-card asset-card">
               <div>
-                <span class="product-badge" style="position: static; margin-bottom: 6px;">${t3.category}</span>
-                <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff; margin-bottom: 4px;">${t3.name}</h3>
-                <p style="font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 8px;">${t3.desc}</p>
-                <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr);">
-                  ${t3.screenshots.map(s => `
-                    <img src="${s}" class="asset-thumb-lg" style="height: 80px;" alt="${t3.name}" onclick="openImageModal('${s}', '${t3.name}')">
-                  `).join('')}
-                </div>
+                <span class="product-badge" style="position: static; margin-bottom: 4px;">${t3.category}</span>
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff; margin-bottom: 2px;">${t3.name}</h3>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">${t3.desc}</p>
+                ${renderImageCarousel(t3.screenshots, 'smartlinks', 'Smart Links Extension', '120px')}
               </div>
             </div>
 
@@ -821,7 +907,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         break;
 
-      case 16: // Slide 17: AI Motion Shorts: im Moon (Big Dedicated Visual Frames)
+      case 16: // Slide 17: AI Motion Shorts: im Moon (Interactive Fast Navigation Carousel)
         const moonImages = d.newAdditions.aiCreativeMedia.imMoon;
         html = `
           <div class="slide-header">
@@ -829,22 +915,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 17 of 34</span>
           </div>
           <h2 class="slide-title">AI Motion Short: "im Moon"</h2>
-          <p class="slide-subtitle">Cinematic generative AI visual short. 5 high-resolution key visual frames. Click any frame for full screen.</p>
+          <p class="slide-subtitle">Cinematic generative AI visual short. Use Left (<) / Right (>) arrows or thumbnail row to navigate keyframes instantly.</p>
           
-          <div class="asset-thumb-grid" style="grid-template-columns: repeat(5, 1fr); margin-top: 18px;">
-            ${moonImages.map((img, i) => `
-              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${img}', 'im Moon — Frame ${i+1}')">
-                <img src="${img}" class="asset-thumb-lg" style="height: 230px;" alt="im Moon Frame ${i+1}">
-                <div style="background: rgba(0,0,0,0.8); text-align: center; padding: 6px; font-size: 0.78rem; color: var(--cyan); font-weight: 600;">
-                  Frame ${i+1}
-                </div>
-              </div>
-            `).join('')}
-          </div>
+          ${renderImageCarousel(moonImages, 'immoon', 'im Moon Visual Short', '270px')}
         `;
         break;
 
-      case 17: // Slide 18: AI Motion Shorts: Thukalgal (Big Dedicated Visual Frames)
+      case 17: // Slide 18: AI Motion Shorts: Thukalgal (Interactive Fast Navigation Carousel)
         const thukalgalImages = d.newAdditions.aiCreativeMedia.thukalgal;
         html = `
           <div class="slide-header">
@@ -852,18 +929,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 18 of 34</span>
           </div>
           <h2 class="slide-title">AI Motion Short: "Thukalgal"</h2>
-          <p class="slide-subtitle">Atmospheric generative AI visual short. 5 large cinematic key frames.</p>
+          <p class="slide-subtitle">Atmospheric generative AI visual short. Use Left (<) / Right (>) controls for smooth presentation flow.</p>
           
-          <div class="asset-thumb-grid" style="grid-template-columns: repeat(5, 1fr); margin-top: 18px;">
-            ${thukalgalImages.map((img, i) => `
-              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${img}', 'Thukalgal — Frame ${i+1}')">
-                <img src="${img}" class="asset-thumb-lg" style="height: 230px;" alt="Thukalgal Frame ${i+1}">
-                <div style="background: rgba(0,0,0,0.8); text-align: center; padding: 6px; font-size: 0.78rem; color: var(--cyan); font-weight: 600;">
-                  Frame ${i+1}
-                </div>
-              </div>
-            `).join('')}
-          </div>
+          ${renderImageCarousel(thukalgalImages, 'thukalgal', 'Thukalgal Visual Short', '270px')}
         `;
         break;
 
@@ -877,40 +945,28 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 19 of 34</span>
           </div>
           <h2 class="slide-title">AI Motion Shorts: Kavasam, Signout & Valaiyosai</h2>
-          <p class="slide-subtitle">High-resolution cinematic visual posters & keyframes.</p>
+          <p class="slide-subtitle">High-resolution cinematic visual posters with interactive image navigation.</p>
           
-          <div class="grid-3" style="margin-top: 14px;">
+          <div class="grid-3" style="margin-top: 12px;">
             <div class="content-card asset-card">
-              <h4 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--cyan); margin-bottom: 8px;">Kavasam</h4>
-              <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr);">
-                ${kavasam.map((img, i) => `
-                  <img src="${img}" class="asset-thumb-lg" style="height: 180px;" alt="Kavasam ${i+1}" onclick="openImageModal('${img}', 'Kavasam Frame ${i+1}')">
-                `).join('')}
-              </div>
+              <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--cyan); margin-bottom: 4px;">Kavasam</h4>
+              ${renderImageCarousel(kavasam, 'kavasam', 'Kavasam Short', '160px')}
             </div>
 
             <div class="content-card asset-card">
-              <h4 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--purple); margin-bottom: 8px;">Signout</h4>
-              <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr);">
-                ${signout.map((img, i) => `
-                  <img src="${img}" class="asset-thumb-lg" style="height: 180px;" alt="Signout ${i+1}" onclick="openImageModal('${img}', 'Signout Frame ${i+1}')">
-                `).join('')}
-              </div>
+              <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--purple); margin-bottom: 4px;">Signout</h4>
+              ${renderImageCarousel(signout, 'signout', 'Signout Short', '160px')}
             </div>
 
             <div class="content-card asset-card">
-              <h4 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--emerald); margin-bottom: 8px;">Valaiyosai</h4>
-              <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr);">
-                ${valaiyosai.map((img, i) => `
-                  <img src="${img}" class="asset-thumb-lg" style="height: 180px;" alt="Valaiyosai ${i+1}" onclick="openImageModal('${img}', 'Valaiyosai Frame ${i+1}')">
-                `).join('')}
-              </div>
+              <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--emerald); margin-bottom: 4px;">Valaiyosai</h4>
+              ${renderImageCarousel(valaiyosai, 'valaiyosai', 'Valaiyosai Short', '160px')}
             </div>
           </div>
         `;
         break;
 
-      case 19: // Slide 20: AI Wedding Story Simulations (Part 1 - 3 Big Visual Frames)
+      case 19: // Slide 20: AI Wedding Story Simulations (Part 1 - Interactive Slider)
         const wed1 = d.newAdditions.aiCreativeMedia.weddingSimulationsPart1;
         html = `
           <div class="slide-header">
@@ -918,22 +974,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 20 of 34</span>
           </div>
           <h2 class="slide-title">AI Wedding Story Simulations (Part 1)</h2>
-          <p class="slide-subtitle">Photorealistic AI character consistency & storytelling simulations. 3 Large side-by-side high-res frames.</p>
+          <p class="slide-subtitle">Photorealistic AI character consistency & storytelling simulations. Interactive image navigation.</p>
           
-          <div class="grid-3" style="margin-top: 18px;">
-            ${wed1.map((img, i) => `
-              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${img}', 'AI Wedding Story Simulation — Frame ${i+1}')">
-                <img src="${img}" class="asset-thumb-lg" style="height: 250px;" alt="AI Wedding Simulation Frame ${i+1}">
-                <div style="background: rgba(0,0,0,0.8); text-align: center; padding: 8px; font-size: 0.85rem; color: var(--cyan); font-weight: 600;">
-                  Simulation Frame ${i+1}
-                </div>
-              </div>
-            `).join('')}
-          </div>
+          ${renderImageCarousel(wed1, 'wedding1', 'AI Wedding Story Simulation (Part 1)', '270px')}
         `;
         break;
 
-      case 20: // Slide 21: AI Wedding Story Simulations (Part 2 - 3 Big Visual Frames)
+      case 20: // Slide 21: AI Wedding Story Simulations (Part 2 - Interactive Slider)
         const wed2 = d.newAdditions.aiCreativeMedia.weddingSimulationsPart2;
         html = `
           <div class="slide-header">
@@ -941,22 +988,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 21 of 34</span>
           </div>
           <h2 class="slide-title">AI Wedding Story Simulations (Part 2)</h2>
-          <p class="slide-subtitle">Photorealistic AI character consistency & storytelling simulations. 3 Large side-by-side high-res frames.</p>
+          <p class="slide-subtitle">Photorealistic AI character consistency & storytelling simulations. Interactive image navigation.</p>
           
-          <div class="grid-3" style="margin-top: 18px;">
-            ${wed2.map((img, i) => `
-              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${img}', 'AI Wedding Story Simulation — Frame ${i+4}')">
-                <img src="${img}" class="asset-thumb-lg" style="height: 250px;" alt="AI Wedding Simulation Frame ${i+4}">
-                <div style="background: rgba(0,0,0,0.8); text-align: center; padding: 8px; font-size: 0.85rem; color: var(--cyan); font-weight: 600;">
-                  Simulation Frame ${i+4}
-                </div>
-              </div>
-            `).join('')}
-          </div>
+          ${renderImageCarousel(wed2, 'wedding2', 'AI Wedding Story Simulation (Part 2)', '270px')}
         `;
         break;
 
-      case 21: // Slide 22: Video Editing & Visual Remixes (3 Big Frames)
+      case 21: // Slide 22: Video Editing & Visual Remixes (Interactive Slider)
         const remixList = d.newAdditions.aiCreativeMedia.remixes;
         html = `
           <div class="slide-header">
@@ -964,18 +1002,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="slide-number">Slide 22 of 34</span>
           </div>
           <h2 class="slide-title">Video Editing & Visual Remixes</h2>
-          <p class="slide-subtitle">Creative video editing, composite keying, and audio-visual remixes.</p>
+          <p class="slide-subtitle">Creative video editing, composite keying, and audio-visual remixes. Interactive image navigation.</p>
           
-          <div class="grid-3" style="margin-top: 18px;">
-            ${remixList.map((img, i) => `
-              <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${img}', 'Video Remix Frame ${i+1}')">
-                <img src="${img}" class="asset-thumb-lg" style="height: 250px;" alt="Video Remix Frame ${i+1}">
-                <div style="background: rgba(0,0,0,0.8); text-align: center; padding: 8px; font-size: 0.85rem; color: var(--cyan); font-weight: 600;">
-                  Remix Frame ${i+1}
-                </div>
-              </div>
-            `).join('')}
-          </div>
+          ${renderImageCarousel(remixList, 'remixes', 'Video Editing & Visual Remixes', '270px')}
         `;
         break;
 

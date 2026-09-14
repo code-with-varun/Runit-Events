@@ -1,6 +1,6 @@
 /**
  * RUNIT ONEVIA 2026 - Master Event Presentation & Portfolio Data
- * 34 Zero-Scroll Keynote Slides with Expanded Big Visual Assets
+ * 34 Zero-Scroll Keynote Slides with Expanded Visual Assets, Converted PAN Images & Brand Logos
  */
 
 const ANONYMOUS_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2310172A' rx='50'/%3E%3Ccircle cx='50' cy='38' r='20' fill='%2300F2FE' opacity='0.85'/%3E%3Cpath d='M20,85 C20,62 33,52 50,52 C67,52 80,62 80,85 Z' fill='%2300F2FE' opacity='0.85'/%3E%3C/svg%3E";
@@ -46,7 +46,25 @@ const EVENT_DATA = {
     { phase: "Phase 6", title: "Product Company Vision", desc: "Launching Runit Infotech as an integrated SaaS & AI solution ecosystem." }
   ],
 
-  // EXPANDED ASSET LIBRARY FOR SPACIOUS ZERO-SCROLL SLIDES
+  // BRAND LOGOS ECOSYSTEM
+  brandLogos: [
+    { name: "Runit Infotech", logo: "assets/Runit logo pack/primary-logo-light.png", category: "Parent Entity" },
+    { name: "Orbita", logo: "assets/other brands/orbita.svg", category: "SaaS Platform" },
+    { name: "PowerBooks", logo: "assets/other brands/powerbooks-logo.png", category: "Productivity Engine" },
+    { name: "MoneyMatrix", logo: "assets/Money Matrix/Logo Exports/4x/Asset 2@4x.png", category: "Financial App" },
+    { name: "ISPARK", logo: "assets/other brands/ispark-logo.png", category: "Learning Hub" },
+    { name: "Lavish Dreamers", logo: "assets/other brands/ldoriginals.png", category: "E-Com Brand" },
+    { name: "Lavish Enterprises", logo: "assets/other brands/lavish-enterprises-logo.png", category: "Enterprise Entity" },
+    { name: "Placid Tech", logo: "assets/other brands/placid-logo.png", category: "Partner Tech" },
+    { name: "PluginsTech", logo: "assets/other brands/pluginstech-logo.png", category: "Partner Tech" },
+    { name: "Lynkr", logo: "assets/other brands/lynkr-logo.png", category: "SaaS Utility" },
+    { name: "Concept 360", logo: "assets/other brands/concept-360-logo.png", category: "Design Partner" },
+    { name: "Sandy & Style", logo: "assets/other brands/sandy and style logo.jpg", category: "Retail Partner" },
+    { name: "Thamizhanda", logo: "assets/other brands/thamizhanda.png", category: "Media Partner" },
+    { name: "Thulasi Superstores", logo: "assets/other brands/thulasi-superstores-logo.png", category: "Retail Partner" }
+  ],
+
+  // EXPANDED ASSET LIBRARY (WITH CONVERTED PAN IMAGES)
   newAdditions: {
     legalRegistrations: [
       {
@@ -57,20 +75,20 @@ const EVENT_DATA = {
         desc: "Official Govt of India MSME Udyam Registration Certificate for Runit Infotech."
       },
       {
-        title: "Lavish Dreamers Pvt Ltd — MCA ROC",
+        title: "Lavish Dreamers Pvt Ltd — MCA ROC & PAN",
         category: "Corporate Incorporation",
         file: "assets/Lavish Dreamers ROC Certificate.pdf",
-        panFile: "assets/Lavish Dreamers PAN.pdf",
-        type: "pdf",
-        desc: "Ministry of Corporate Affairs ROC Incorporation Certificate & Official PAN Card."
+        panImg: "assets/Lavish Dreamers LAVISH ENTERPRISE PAN (1).png",
+        type: "mixed",
+        desc: "Ministry of Corporate Affairs ROC Incorporation Certificate & Govt PAN Card Image."
       },
       {
-        title: "Lavish Enterprises — MCA ROC Certificate",
+        title: "Lavish Enterprises — MCA ROC & PAN",
         category: "Corporate Registration",
         file: "assets/Lavish Enterprises ROC Certificate.pdf",
-        panFile: "assets/lavish Enterprises PAN.pdf",
-        type: "pdf",
-        desc: "Official ROC Incorporation Certificate & Govt PAN Card for Lavish Enterprises."
+        panImg: "assets/Lavish Dreamers LAVISH ENTERPRISE PAN (2).png",
+        type: "mixed",
+        desc: "Official ROC Incorporation Certificate & Govt PAN Card Image for Lavish Enterprises."
       }
     ],
 
@@ -102,6 +120,7 @@ const EVENT_DATA = {
       moneyMatrix: {
         name: "MoneyMatrix (Cash Tracker)",
         link: "https://runit-cash-tracker.vercel.app/",
+        logo: "assets/Money Matrix/Logo Exports/4x/Asset 2@4x.png",
         category: "Financial Productivity",
         desc: "Live cash-flow visibility & expense tracking app.",
         tech: ["Vite", "React", "Chart.js"]
@@ -109,6 +128,7 @@ const EVENT_DATA = {
       orbita: {
         name: "Orbita Platform",
         link: "https://orbita-ashen.vercel.app/",
+        logo: "assets/other brands/orbita.svg",
         category: "Task Management",
         desc: "Productivity platform for team sprint & execution tracking.",
         tech: ["React", "Node.js", "Tailwind"]
@@ -128,6 +148,7 @@ const EVENT_DATA = {
       lavishDreamers: {
         name: "Lavish Dreamers E-Com",
         link: "https://lavishdreamers.com/",
+        logo: "assets/other brands/ldoriginals.png",
         category: "E-Commerce Brand",
         screenshots: [
           "assets/Lavish Dreamers (1).png",
@@ -410,7 +431,7 @@ const EVENT_DATA = {
       tagline: "Simplify workflows & elevate team execution",
       description: "A productivity-focused platform engineered to streamline internal operations, track task progress, and eliminate workflow friction.",
       features: ["Workflow Automation", "Task Dependency Matrix", "Real-Time Activity Feed", "Custom Dashboard Views"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
+      image: "assets/other brands/orbita.svg",
       link: "https://orbita.runit.app",
       tech: ["Node.js", "React / Vite", "TailwindCSS", "PostgreSQL"]
     },
@@ -422,7 +443,7 @@ const EVENT_DATA = {
       tagline: "Organize, manage & scale business data seamlessly",
       description: "A comprehensive business-productivity engine designed to help professionals store, structure, and retrieve operational information with speed and privacy.",
       features: ["Structured Document Management", "Smart Search & Filtering", "Role-Based Access", "Export & Reporting Tools"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
+      image: "assets/other brands/powerbooks-logo.png",
       link: "https://powerbooks.runit.app",
       tech: ["MongoDB / MERN", "React", "Express", "Node.js"]
     },
@@ -435,7 +456,7 @@ const EVENT_DATA = {
       tagline: "Expense tracking, cash-flow visibility & financial control",
       description: "A smart financial tracking tool providing real-time cash flow monitoring, expense classification, and vendor billing management.",
       features: ["Cash Flow Analytics", "Expense Categorization", "Billing & Vendor Tracking", "Financial Health Reports"],
-      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80",
+      image: "assets/Money Matrix/Logo Exports/4x/Asset 2@4x.png",
       link: "https://moneymatrix.runit.app",
       tech: ["Vite", "React", "Chart.js", "Firebase / Firestore"]
     },
@@ -447,7 +468,7 @@ const EVENT_DATA = {
       tagline: "Empowering minds, fostering collaboration & driving growth",
       description: "A community-centric platform built to support continuous learning, project collaboration, and idea incubation among tech enthusiasts and creators.",
       features: ["Skill Sharing Hub", "Project Incubation", "Mentorship Tracks", "Resource Library"],
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80",
+      image: "assets/other brands/ispark-logo.png",
       link: "https://ispark.runit.app",
       tech: ["HTML5 / JS", "TailwindCSS", "Firebase Auth"]
     },
