@@ -85,23 +85,27 @@ const EVENT_DATA = {
     { phase: "Phase 6", title: "Product Company Vision", desc: "Launching Runit Infotech as an integrated SaaS & AI solution ecosystem." }
   ],
 
-  // BRAND LOGOS ECOSYSTEM
-  brandLogos: [
-    { name: "Runit Infotech", logo: "assets/Runit logo pack/primary-logo.png", category: "Parent Entity" },
-    { name: "Orbita", logo: "assets/other brands/orbita.svg", category: "SaaS Platform" },
-    { name: "PowerBooks", logo: "assets/other brands/powerbooks-logo.png", category: "Productivity Engine" },
-    { name: "MoneyMatrix", logo: "assets/Money Matrix/Logo Exports/4x/Asset 2@4x.png", category: "Financial App" },
-    { name: "ISPARK", logo: "assets/other brands/ispark-logo.png", category: "Learning Hub" },
-    { name: "Lavish Dreamers", logo: "assets/other brands/ldoriginals.png", category: "E-Com Brand" },
-    { name: "Lavish Enterprises", logo: "assets/other brands/lavish-enterprises-logo.png", category: "Enterprise Entity" },
-    { name: "Placid Tech", logo: "assets/other brands/placid-logo.png", category: "Partner Tech" },
-    { name: "PluginsTech", logo: "assets/other brands/pluginstech-logo.png", category: "Partner Tech" },
-    { name: "Lynkr", logo: "assets/other brands/lynkr-logo.png", category: "SaaS Utility" },
-    { name: "Concept 360", logo: "assets/other brands/concept-360-logo.png", category: "Design Partner" },
-    { name: "Sandy & Style", logo: "assets/other brands/sandy and style logo.jpg", category: "Retail Partner" },
-    { name: "Thamizhanda", logo: "assets/other brands/thamizhanda.png", category: "Media Partner" },
-    { name: "Thulasi Superstores", logo: "assets/other brands/thulasi-superstores-logo.png", category: "Retail Partner" }
-  ],
+  // BRAND LOGOS ECOSYSTEM (SPLIT INTO RUNIT BRANDS & PARTNER ECOSYSTEM)
+  brandLogos: {
+    runitBrands: [
+      { name: "Runit Infotech", logo: "assets/Runit logo pack/primary-logo.png", category: "Parent Entity" },
+      { name: "Orbita", logo: "assets/other brands/orbita.svg", category: "SaaS Platform" },
+      { name: "PowerBooks", logo: "assets/other brands/powerbooks-logo.png", category: "Productivity Engine" },
+      { name: "MoneyMatrix", logo: "assets/Money Matrix/Logo Exports/4x/Asset 2@4x.png", category: "Financial App" },
+      { name: "ISPARK", logo: "assets/other brands/ispark-logo.png", category: "Learning Hub" },
+      { name: "Lavish Dreamers", logo: "assets/other brands/ldoriginals.png", category: "E-Com Brand" },
+      { name: "Lavish Enterprises", logo: "assets/other brands/lavish-enterprises-logo.png", category: "Enterprise Entity" }
+    ],
+    partnerBrands: [
+      { name: "Placid Tech", logo: "assets/other brands/placid-logo.png", category: "Partner Tech" },
+      { name: "PluginsTech", logo: "assets/other brands/pluginstech-logo.png", category: "Partner Tech" },
+      { name: "Lynkr", logo: "assets/other brands/lynkr-logo.png", category: "SaaS Utility" },
+      { name: "Concept 360", logo: "assets/other brands/concept-360-logo.png", category: "Design Partner" },
+      { name: "Sandy & Style", logo: "assets/other brands/sandy and style logo.jpg", category: "Retail Partner" },
+      { name: "Thamizhanda", logo: "assets/other brands/thamizhanda.png", category: "Media Partner" },
+      { name: "Thulasi Superstores", logo: "assets/other brands/thulasi-superstores-logo.png", category: "Retail Partner" }
+    ]
+  },
 
   // EXPANDED ASSET LIBRARY (WITH CONVERTED PAN IMAGES)
   newAdditions: {
