@@ -489,7 +489,14 @@ const EVENT_DATA = {
       tagline: "Transforming raw data into actionable decision dashboards",
       description: "Turnkey MIS reporting solutions catering to BFSI, retail, and enterprise sectors, offering executive dashboards, collection tracking, and automated reporting.",
       features: ["Executive Dashboards", "Collection MIS & Recovery Tracking", "Retail Inventory Analytics", "Vendor Billing & SLA Dashboards"],
-      image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&auto=format&fit=crop&q=80",
+      image: "assets/MIS Reporting (1).png",
+      screenshots: [
+        "assets/MIS Reporting (1).png",
+        "assets/MIS Reporting (2).png",
+        "assets/MIS Reporting (3).png",
+        "assets/MIS Reporting (4).png",
+        "assets/MIS Reporting (5).png"
+      ],
       link: "https://mis.runit.app",
       tech: ["PowerBI / Excel Automation", "Python Scripts", "SQL Data Warehousing"]
     }

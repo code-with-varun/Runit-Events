@@ -1307,7 +1307,52 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
 
       case 33: // Slide 34: MIS Services Spotlight
-        html = renderProductSlide(d.products[4], 34);
+        const mis = d.products[4];
+        html = `
+          <div class="slide-header">
+            <span class="slide-tag">Business Intelligence</span>
+            <span class="slide-number">Slide 34 of ${totalSlides}</span>
+          </div>
+          <h2 class="slide-title">MIS Reporting Services</h2>
+          <p class="slide-subtitle">${mis.description} Click any dashboard screen for full-screen lightbox presentation.</p>
+
+          <div class="grid-2" style="margin-top: 14px;">
+            <div class="content-card" style="padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <span class="product-badge" style="position: static; margin-bottom: 6px;">${mis.badge}</span>
+                <h3 style="font-family: var(--font-heading); font-size: 1.3rem; color: var(--cyan); margin-bottom: 6px;">${mis.tagline}</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">${mis.description}</p>
+                
+                <h4 style="font-family: var(--font-heading); font-size: 1rem; color: #fff; margin-bottom: 8px;">Key Capabilities:</h4>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;">
+                  ${mis.features.map(f => `
+                    <li style="display: flex; gap: 8px; font-size: 0.85rem; color: var(--text-secondary);">
+                      <span style="color: var(--emerald);">✓</span> ${f}
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                ${mis.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+              </div>
+            </div>
+
+            <div class="content-card asset-card" style="padding: 16px;">
+              <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff; margin-bottom: 8px;">Executive MIS Dashboards (5 Screenshots)</h4>
+              <div class="asset-thumb-grid" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                ${mis.screenshots.map((img, i) => `
+                  <div style="border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-glass); cursor: pointer;" onclick="openImageModal('${img}', 'MIS Reporting Dashboard View ${i+1}', ${JSON.stringify(mis.screenshots).replace(/"/g, '&quot;')}, ${i})">
+                    <img src="${img}" class="asset-thumb-lg" style="height: 110px; object-fit: cover;" alt="MIS Report ${i+1}">
+                    <div style="background: rgba(0,0,0,0.85); text-align: center; padding: 4px; font-size: 0.75rem; color: var(--cyan); font-weight: 600;">
+                      View ${i+1}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
         break;
 
       case 34: // Slide 35: 5-Year Roadmap
