@@ -1604,8 +1604,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentViewMode !== 'deck') return;
     if (document.querySelector('.modal-backdrop.active')) return;
 
-    // Allow internal scroll inside scrollable cards when not at boundary
-    const scrollable = e.target ? e.target.closest('.team-card, [style*="overflow-y: auto"], [style*="overflow: auto"]') : null;
+    // Allow internal scroll inside scrollable containers when not at boundary
+    const scrollable = e.target ? e.target.closest('[style*="overflow-y: auto"], [style*="overflow-y:scroll"]') : null;
     if (scrollable) {
       const isAtBottom = scrollable.scrollHeight - scrollable.scrollTop <= scrollable.clientHeight + 5;
       const isAtTop = scrollable.scrollTop <= 5;
@@ -1614,15 +1614,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isScrolling) return;
+    if (Math.abs(e.deltaY) < 1) return;
 
-    if (e.deltaY > 5) {
+    if (e.deltaY > 0) {
       isScrolling = true;
       goToSlide(currentSlideIndex + 1);
-      setTimeout(() => { isScrolling = false; }, 300);
-    } else if (e.deltaY < -5) {
+      setTimeout(() => { isScrolling = false; }, 350);
+    } else if (e.deltaY < 0) {
       isScrolling = true;
       goToSlide(currentSlideIndex - 1);
-      setTimeout(() => { isScrolling = false; }, 300);
+      setTimeout(() => { isScrolling = false; }, 350);
     }
   }, { passive: true });
 

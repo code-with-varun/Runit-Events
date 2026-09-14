@@ -16,6 +16,45 @@ const EVENT_DATA = {
     location: "Live Virtual Event / Screen Share"
   },
 
+  welcome: {
+    title: "Welcome to RUNIT ONEVIA 2026",
+    subtitle: "One Vision. One Community. One Direction.",
+    paragraphs: [
+      "Welcome to the annual flagship vision event of Runit Infotech. Today, we bring together software engineering, MIS business intelligence, AI workflow automation, and digital branding under a single unified direction.",
+      "Our goal is to build powerful, high-impact products, streamline enterprise operations, and build a collaborative ecosystem for creators, developers, and domain experts."
+    ],
+    quote: "Empowering businesses through intelligent automation, elegant design, and software excellence.",
+    quoteAuthor: "Varun Akshay (Founder & Product Lead)"
+  },
+
+  agenda: [
+    { time: "06:00 PM", title: "Welcome & Keynote Opening", desc: "Setting the stage for RUNIT ONEVIA 2026 and core event objectives." },
+    { time: "06:15 PM", title: "Company Vision & Legal Entity", desc: "Overview of Runit Infotech, Lavish Dreamers, and government registrations." },
+    { time: "06:35 PM", title: "Live Product Demonstrations", desc: "Showcasing MoneyMatrix, Orbita, ScripVault, and developer tools." },
+    { time: "07:05 PM", title: "AI & Workflow Automation", desc: "Generative AI creative media shorts, n8n automations, and MS Access tools." },
+    { time: "07:30 PM", title: "MIS & Business Intelligence", desc: "Executive MIS dashboards, collection recovery analytics, and retail reporting." },
+    { time: "07:55 PM", title: "5-Year Strategic Roadmap & Team", desc: "Runit Nextora execution rhythm, team presentations, and open discussion." }
+  ],
+
+  whyRunit: {
+    title: "Why Runit Infotech Exists",
+    subtitle: "Bridging the gap between disjointed tools, manual enterprise overhead, and modern AI automation.",
+    challenges: [
+      "Fragmented business software leading to data silos and operational delays.",
+      "Heavy reliance on manual Excel reporting and labor-intensive tracking.",
+      "Lack of integrated AI workflows and modern design standards for small-to-mid enterprise tools."
+    ],
+    solutions: [
+      "Unified SaaS ecosystem connecting task tracking, cash management, and MIS intelligence.",
+      "Automated data pipelines and zero-touch reporting engines.",
+      "Clean, publication-grade UI/UX design combined with scalable cloud backends."
+    ]
+  },
+
+  aboutRunit: {
+    overview: "Runit Infotech is a forward-thinking technology entity dedicated to SaaS development, business process automation, MIS analytics, and AI creative solutions."
+  },
+
   motto: "Learn Continuously • Build Consistently • Collaborate Effectively • Grow Together",
 
   objectives: [
