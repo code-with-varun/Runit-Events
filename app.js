@@ -190,8 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openModal('modal-timer');
   }
 
-  // Keybindings & Presentation Modes
-  window.addEventListener('keydown', handleKeyDown);
+  // Keybindings & Presentation Modes are initialized below
 
   // Initialize Clock & Countdowns
   updateClockAndCountdown();
