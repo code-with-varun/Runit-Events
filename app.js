@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     goToSlide(0);
     startPresenterTimer();
   }
+  window.unlockEvent = startPresentation;
 
   function startPresenterTimer() {
     if (presenterTimerInterval) return;
@@ -1829,21 +1830,77 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openModal('modal-product');
   };
 
-  // Image Lightbox Modal
-  window.openImageModal = function(imgUrl, title) {
+  // Image Lightbox Modal with Gallery Navigation
+  window.openImageModal = function(imgUrl, title, imgList = [], currentIndex = 0) {
+    if (Array.isArray(imgUrl)) {
+      imgList = imgUrl;
+      currentIndex = typeof title === 'number' ? title : 0;
+      title = arguments[2] || 'Image Viewer';
+      imgUrl = imgList[currentIndex];
+    } else if (!imgList || !Array.isArray(imgList) || imgList.length === 0) {
+      imgList = [imgUrl];
+      currentIndex = 0;
+    }
+
+    window.currentLightboxImages = imgList;
+    window.currentLightboxIndex = currentIndex;
+    window.currentLightboxTitle = title || 'Image Viewer';
+
+    window.renderLightboxContent();
+    window.openModal('modal-product');
+  };
+
+  window.navigateLightbox = function(direction) {
+    if (!window.currentLightboxImages || window.currentLightboxImages.length <= 1) return;
+    window.currentLightboxIndex += direction;
+    if (window.currentLightboxIndex < 0) {
+      window.currentLightboxIndex = window.currentLightboxImages.length - 1;
+    } else if (window.currentLightboxIndex >= window.currentLightboxImages.length) {
+      window.currentLightboxIndex = 0;
+    }
+    window.renderLightboxContent();
+  };
+
+  window.renderLightboxContent = function() {
     const body = document.getElementById('modal-product-body');
+    if (!body) return;
+
+    const images = window.currentLightboxImages || [];
+    const idx = window.currentLightboxIndex || 0;
+    const title = window.currentLightboxTitle || 'Image Viewer';
+    const currentImg = images[idx] || '';
+    const hasMultiple = images.length > 1;
+
     body.innerHTML = `
-      <h3 style="font-family: var(--font-heading); color: var(--cyan); font-size: 1.3rem; margin-bottom: 12px;">🖼️ ${title}</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="font-family: var(--font-heading); color: var(--cyan); font-size: 1.2rem; margin: 0;">🖼️ ${title} ${hasMultiple ? `<span style="font-size: 0.9rem; color: var(--text-secondary);">(${idx + 1}/${images.length})</span>` : ''}</h3>
+        <button class="btn-secondary" onclick="closeModal('modal-product')" style="padding: 4px 12px; font-size: 0.8rem;">✕ Close</button>
+      </div>
       
-      <div style="width: 100%; max-height: 520px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); text-align: center; background: rgba(0,0,0,0.5);">
-        <img src="${imgUrl}" alt="${title}" style="max-width: 100%; max-height: 500px; object-fit: contain;">
+      <div style="position: relative; width: 100%; height: 500px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-glass); text-align: center; background: #0b0f19; display: flex; align-items: center; justify-content: center;">
+        ${hasMultiple ? `
+          <button onclick="navigateLightbox(-1)" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.75); color: var(--cyan); border: 1px solid var(--border-glass); border-radius: 50%; width: 44px; height: 44px; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" title="Previous Image (←)">
+            ❮
+          </button>
+        ` : ''}
+
+        <img src="${currentImg}" alt="${title}" style="max-width: 100%; max-height: 480px; object-fit: contain; border-radius: 6px;">
+
+        ${hasMultiple ? `
+          <button onclick="navigateLightbox(1)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.75); color: var(--cyan); border: 1px solid var(--border-glass); border-radius: 50%; width: 44px; height: 44px; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" title="Next Image (→)">
+            ❯
+          </button>
+        ` : ''}
       </div>
 
-      <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
-        <button class="btn-secondary" onclick="closeModal('modal-product')">Close Lightbox</button>
-      </div>
+      ${hasMultiple ? `
+        <div style="display: flex; gap: 8px; justify-content: center; margin-top: 12px; overflow-x: auto; padding: 4px;">
+          ${images.map((img, i) => `
+            <img src="${img}" onclick="window.currentLightboxIndex = ${i}; window.renderLightboxContent();" style="width: 54px; height: 44px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid ${i === idx ? 'var(--cyan)' : 'transparent'}; opacity: ${i === idx ? '1' : '0.5'}; transition: all 0.2s;" />
+          `).join('')}
+        </div>
+      ` : ''}
     `;
-    window.openModal('modal-product');
   };
 
   window.openProductModal = function(productId) {
