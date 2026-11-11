@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Prevent direct access to protected directories
+    RewriteRule ^(config|database|src|vendor|views) - [F,L,NC]
+
+    # If the request is already within public/, do not rewrite
+    RewriteRule ^public/ - [L]
+
+    # Route all requests to the public/ directory
+    RewriteRule ^$ public/ [QSA,L]
+    RewriteRule ^(.*)$ public/$1 [QSA,L]
+</IfModule>
+

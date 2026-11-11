@@ -1,0 +1,664 @@
+/* ==========================================================================
+   Runit Events Hub - BookMyShow Signature Light Theme Stylesheet
+   ========================================================================== */
+
+:root {
+    /* BookMyShow Iconic Palette */
+    --bms-red: #f84464;
+    --bms-red-hover: #e23755;
+    --bms-red-active: #c52945;
+    --bms-dark: #333545;
+    --bms-darker: #1f2533;
+    --bms-subnav: #222539;
+    
+    /* Light Theme Surfaces & Backgrounds */
+    --bms-bg: #f5f5f7;
+    --bms-card-bg: #ffffff;
+    --bms-border: #e5e7eb;
+    --bms-border-light: #f1f2f6;
+    
+    /* Typography */
+    --bms-text-main: #222222;
+    --bms-text-secondary: #666666;
+    --bms-text-muted: #888888;
+    
+    /* Accents & Status */
+    --bms-green: #10b981;
+    --bms-green-light: #ecfdf5;
+    --bms-yellow: #f59e0b;
+    --bms-yellow-light: #fffbeb;
+    --bms-blue: #3b82f6;
+    
+    /* Shadows */
+    --bms-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --bms-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --bms-shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.12);
+    --bms-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Base Body */
+body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--bms-bg);
+    color: var(--bms-text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+
+.bms-navbar-top {
+    background-color: var(--bms-dark);
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bms-search-box {
+    position: relative;
+    max-width: 480px;
+    width: 100%;
+}
+
+.bms-search-box input {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 9px 16px 9px 40px;
+    font-size: 0.9rem;
+    color: #1f2937;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.bms-search-box input:focus {
+    outline: none;
+    border-color: var(--bms-red);
+    box-shadow: 0 0 0 3px rgba(248, 68, 100, 0.2);
+}
+
+.bms-search-box .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+
+.bms-subnav {
+    background-color: var(--bms-subnav);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bms-subnav .nav-link {
+    color: #d1d5db;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    transition: color 0.15s ease;
+    border-radius: 4px;
+}
+
+.bms-subnav .nav-link:hover,
+.bms-subnav .nav-link.active {
+    color: #ffffff;
+}
+
+.bms-subnav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn-bms-red {
+    background-color: var(--bms-red);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 8px rgba(248, 68, 100, 0.25);
+}
+
+.btn-bms-red:hover {
+    background-color: var(--bms-red-hover);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(248, 68, 100, 0.35);
+}
+
+.btn-bms-outline {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 7px 16px;
+    transition: all 0.2s ease;
+}
+
+.btn-bms-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+/* ==========================================================================
+   Hero Slider (Clean Image-Only Carousel - 100% Uncropped Display)
+   ========================================================================== */
+.bms-carousel-wrapper {
+    background: #ebebf2;
+    padding: 20px 0 24px 0;
+    border-bottom: 1px solid var(--bms-border);
+}
+
+.bms-hero-clean-slide {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--bms-shadow-md);
+    display: block;
+    background: transparent;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bms-hero-clean-slide:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bms-shadow-lg);
+}
+
+.bms-hero-clean-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+    object-fit: contain;
+}
+
+/* Indicators placed cleanly below banner so they never cover banner text */
+#heroCarousel .carousel-indicators {
+    position: static;
+    margin: 14px 0 0 0;
+    justify-content: center;
+}
+
+#heroCarousel .carousel-indicators [data-bs-target] {
+    background-color: #94a3b8;
+    opacity: 0.6;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+#heroCarousel .carousel-indicators .active {
+    background-color: var(--bms-red);
+    opacity: 1;
+    transform: scale(1.25);
+}
+
+/* ==========================================================================
+   Hero Slider Animation Engine
+   ========================================================================== */
+
+/* 1. Zoom & Fade (Ken Burns) */
+.hero-anim-zoom-fade.carousel-fade .carousel-item {
+    opacity: 0;
+    transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.hero-anim-zoom-fade.carousel-fade .carousel-item img {
+    transform: scale(1.015);
+    transition: transform 5s ease-out;
+}
+.hero-anim-zoom-fade.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+.hero-anim-zoom-fade.carousel-fade .carousel-item.active img {
+    transform: scale(1);
+}
+
+/* 2. 3D Perspective Flip */
+.hero-anim-flip-3d {
+    perspective: 1400px;
+}
+.hero-anim-flip-3d .carousel-inner {
+    transform-style: preserve-3d;
+}
+.hero-anim-flip-3d .carousel-item {
+    transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.75s ease;
+    transform-origin: center center;
+    backface-visibility: hidden;
+}
+.hero-anim-flip-3d .carousel-item-next.carousel-item-start,
+.hero-anim-flip-3d .carousel-item-prev.carousel-item-end {
+    transform: rotateY(0deg);
+    opacity: 1;
+}
+.hero-anim-flip-3d .active.carousel-item-start {
+    transform: rotateY(-75deg) scale(0.92);
+    opacity: 0;
+}
+.hero-anim-flip-3d .active.carousel-item-end {
+    transform: rotateY(75deg) scale(0.92);
+    opacity: 0;
+}
+
+/* 3. Vertical Slide Up */
+.hero-anim-slide-up .carousel-item-next.carousel-item-start,
+.hero-anim-slide-up .carousel-item-prev.carousel-item-end {
+    transform: translateY(0);
+}
+.hero-anim-slide-up .carousel-item-next,
+.hero-anim-slide-up .active.carousel-item-end {
+    transform: translateY(100%);
+}
+.hero-anim-slide-up .carousel-item-prev,
+.hero-anim-slide-up .active.carousel-item-start {
+    transform: translateY(-100%);
+}
+.hero-anim-slide-up .carousel-item {
+    transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 4. Smooth Fade */
+.hero-anim-fade.carousel-fade .carousel-item {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out !important;
+}
+.hero-anim-fade.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+
+/* Category Pills */
+.bms-cat-pill {
+    background: #ffffff;
+    border: 1px solid var(--bms-border);
+    border-radius: 30px;
+    padding: 8px 18px;
+    color: var(--bms-text-main);
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: var(--bms-shadow-sm);
+}
+
+.bms-cat-pill:hover,
+.bms-cat-pill.active {
+    background: var(--bms-red);
+    color: #ffffff;
+    border-color: var(--bms-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(248, 68, 100, 0.25);
+}
+
+.bms-cat-pill i {
+    color: var(--bms-red);
+    font-size: 1.05rem;
+}
+
+.bms-cat-pill:hover i,
+.bms-cat-pill.active i {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Event Cards (BookMyShow Movie/Event Card Layout)
+   ========================================================================== */
+.bms-card {
+    background: #ffffff;
+    border: 1px solid var(--bms-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--bms-shadow-card);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bms-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--bms-shadow-lg);
+    border-color: #cbd5e1;
+}
+
+.bms-card-poster {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background-color: #e2e8f0;
+}
+
+.bms-card-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.bms-card:hover .bms-card-poster img {
+    transform: scale(1.04);
+}
+
+.bms-poster-bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    padding: 8px 12px;
+    color: #ffffff;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bms-rating-pill {
+    background: #111827;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.bms-rating-pill i {
+    color: var(--bms-red);
+}
+
+.bms-card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: #ffffff;
+}
+
+.bms-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--bms-text-main);
+    line-height: 1.35;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.bms-card-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.bms-card-title a:hover {
+    color: var(--bms-red);
+}
+
+.bms-card-category {
+    font-size: 0.8rem;
+    color: var(--bms-text-secondary);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.bms-card-summary {
+    font-size: 0.85rem;
+    color: var(--bms-text-secondary);
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   NEW ELEGANT CAPACITY STATUS CHIP (Replaces Red/Yellow/Green Progress Bar)
+   ========================================================================== */
+.bms-seat-chip {
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+}
+
+.bms-seat-chip.available {
+    background-color: #f8fafc;
+    border-color: #e2e8f0;
+    color: #334155;
+}
+
+.bms-seat-chip.fast-filling {
+    background-color: #fff1f2;
+    border-color: #fecdd3;
+    color: #9f1239;
+}
+
+.bms-seat-chip.full {
+    background-color: #f3f4f6;
+    border-color: #e5e7eb;
+    color: #4b5563;
+}
+
+.bms-tag-free {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.bms-tag-cert {
+    background-color: #fffbeb;
+    color: #92400e;
+    border: 1px solid #fde68a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Details Hero, M-Ticket, and Utilities
+   ========================================================================== */
+.bms-details-hero {
+    background: #1a1a24;
+    color: #ffffff;
+    padding: 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.bms-details-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #1a1a24 20%, rgba(26, 26, 36, 0.85) 60%, rgba(26, 26, 36, 0.4) 100%);
+    z-index: 1;
+}
+
+.bms-details-hero-bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 60%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    opacity: 0.4;
+}
+
+.bms-details-content {
+    position: relative;
+    z-index: 2;
+}
+
+.bms-poster-frame {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 16/9;
+    min-height: 190px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    background: #0b1329;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bms-format-chip {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.bms-rating-box {
+    background: #252836;
+    border-radius: 10px;
+    padding: 12px 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin: 16px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bms-rating-box .score {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.bms-rating-box .score i {
+    color: var(--bms-red);
+}
+
+/* Perforated M-Ticket */
+.bms-ticket-container {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: var(--bms-shadow-lg);
+    position: relative;
+    overflow: hidden;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.bms-ticket-header {
+    background-color: var(--bms-dark);
+    color: #ffffff;
+    padding: 24px;
+    position: relative;
+}
+
+.bms-ticket-divider {
+    position: relative;
+    border-top: 2px dashed #d1d5db;
+    margin: 0;
+}
+
+.bms-ticket-divider::before,
+.bms-ticket-divider::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: var(--bms-bg);
+    border-radius: 50%;
+    top: -12px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bms-ticket-divider::before { left: -12px; }
+.bms-ticket-divider::after { right: -12px; }
+
+.bms-ticket-body {
+    padding: 28px;
+    background: #ffffff;
+}
+
+/* Footer */
+.bms-footer-banner {
+    background-color: #2b3148;
+    color: #ffffff;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bms-main-footer {
+    background-color: var(--bms-dark);
+    color: #9ca3af;
+    padding: 48px 0 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bms-main-footer h6 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+}
+
+.bms-main-footer a {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.bms-main-footer a:hover {
+    color: #ffffff;
+}
+
+.light-card {
+    background: #ffffff;
+    border: 1px solid var(--bms-border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--bms-shadow-sm);
+}
+
+.light-table th {
+    background-color: #f9fafb !important;
+    color: #4b5563 !important;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.light-table td {
+    border-bottom: 1px solid #f3f4f6;
+    color: #1f2937;
+    vertical-align: middle;
+}
