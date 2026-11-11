@@ -6,9 +6,10 @@ $distDir = Join-Path $PSScriptRoot "dist"
 
 Write-Host "Packaging release from development/ to release/dist/..." -ForegroundColor Cyan
 
-if (-not (Test-Path $distDir)) {
-    New-Item -ItemType Directory -Path $distDir -Force | Out-Null
+if (Test-Path $distDir) {
+    Remove-Item -Path $distDir -Recurse -Force
 }
+New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 
 $copyItems = @('config', 'src', 'views', 'public', '.htaccess', 'index.php', 'composer.json', 'composer.lock')
 
@@ -16,7 +17,7 @@ foreach ($item in $copyItems) {
     $src = Join-Path $srcDir $item
     $dst = Join-Path $distDir $item
     if (Test-Path $src) {
-        Copy-Item -Path $src -Destination $dst -Recurse -Force
+        Copy-Item -Path $src -Destination $distDir -Recurse -Force
         Write-Host "✓ Copied: $item" -ForegroundColor Green
     }
 }
