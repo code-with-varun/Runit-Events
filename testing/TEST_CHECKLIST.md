@@ -29,3 +29,4 @@
 - [ ] Post-event video embed sanitizes YouTube watch URLs into embed iframes.
 - [ ] Speaker mapping to events.
 - [ ] Footer settings CMS saves brand description, address, email, phone, and social URLs.
+

@@ -13,3 +13,4 @@
 - Fixed issue where concluded events were hidden when querying `status=completed`.
 - Fixed hero banner cropping on widescreen monitors.
 - Fixed video embed URLs to automatically sanitize YouTube, Vimeo, and iframe links.
+

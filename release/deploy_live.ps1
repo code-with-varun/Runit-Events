@@ -1,4 +1,4 @@
-﻿# deploy_live.ps1
+# deploy_live.ps1
 # Automates uploading the release/dist final package to Hostinger FTP (https://runito.in/events/)
 
 $ftpServer = "ftp.runito.in"
@@ -67,3 +67,4 @@ foreach ($f in $files) {
 }
 
 Write-Host "`n=== Release Deployment: $successCount succeeded, $failCount failed ===" -ForegroundColor Yellow
+

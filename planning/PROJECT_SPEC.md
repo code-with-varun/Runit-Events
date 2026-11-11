@@ -48,3 +48,4 @@
 - Automated verification ledger with public certificate lookup (`/verify-cert`).
 - Tamper-proof QR codes linking to authentic credentials.
 - Conditional certificate badges shown only for eligible programs.
+

@@ -47,3 +47,4 @@ The platform follows a clean, decoupled **Model-View-Controller (MVC)** design p
 - **Role-Based Access Control (RBAC)**: Distinct permissions for `admin` (Role 1), `speaker` (Role 2), and `learner` (Role 3).
 - **SQL Injection Prevention**: 100% prepared PDO statements with parameterized binding.
 - **XSS Sanitization**: Strict HTML entity encoding on all user-supplied inputs and video embed URL extractors.
+
